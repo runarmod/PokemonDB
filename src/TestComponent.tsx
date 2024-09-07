@@ -1,14 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
-import { Requests } from "./api/Requests";
 import { PokeAPI } from "pokeapi-types";
+import { Requests } from "./api/Requests";
+import "./Test.css";
 
-export const TestComponent = ({ pokemonId }: { pokemonId: number }) => {
-    function fetchData(): Promise<PokeAPI.Pokemon> {
-        return Requests.getPokemonById(pokemonId);
+export const TestComponent = ({
+    limit,
+    offset,
+}: {
+    limit: number;
+    offset: number;
+}) => {
+    function fetchData(): Promise<PokeAPI.Pokemon[]> {
+        return Requests.getPokemonSliceAllData(limit, offset);
+    }
+
+    function capitalizeFirstLetter(string: string): string {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     const { data, error, isLoading } = useQuery({
-        queryKey: ["pokemon"],
+        queryKey: ["pokemon", "allData", limit, offset],
         queryFn: fetchData,
     });
 
@@ -16,8 +27,16 @@ export const TestComponent = ({ pokemonId }: { pokemonId: number }) => {
     if (error) return <div>Error fetching Pokémon data</div>;
 
     return (
-        <div>
-            <h1>Pokémon Name: {data?.name || "undefined"}</h1>
+        <div className="pokemonCollection">
+            {data?.map((pokemon) => (
+                <div key={pokemon.id}>
+                    <h3>{capitalizeFirstLetter(pokemon.name)}</h3>
+                    <img
+                        src={pokemon.sprites.front_default}
+                        alt={pokemon.name}
+                    />
+                </div>
+            ))}
         </div>
     );
 };
