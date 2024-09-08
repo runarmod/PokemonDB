@@ -1,0 +1,67 @@
+#PokemonCardContainer {
+    height: 50vh;
+    width: 50vw;
+    background-color: white;
+    border-radius: 10px;
+    display: flex;
+}
+
+#ImageContainer {
+    height: 100%;
+    width: 50%;
+    border-radius: 10px 0px 0px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px;
+}
+
+#PokemonCardContainer img {
+    height: 60%;
+    padding: 10px;
+}
+
+#StatContainer {
+    width: 50%;
+    height: 100%;
+    border-radius: 0px 10px 10px 0px;
+}
+
+#StatContainer header {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+#StatContainer header h1,
+#StatContainer header h2 {
+    margin: 0;
+    padding: 0;
+}
+
+#StatGrid {
+    display: grid;
+    align-items: start;
+    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(3, auto);
+}
+
+#StatGrid section {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+#StatGrid section h3,
+#StatGrid section p,
+#StatGrid section ul {
+    padding: 0;
+    margin: 0;
+}
+
+#StatGrid section li {
+    list-style: none;
+}
