@@ -1,9 +1,10 @@
 #PokemonCardContainer {
     height: 50vh;
-    width: 50vw;
+    aspect-ratio: 5/3;
     background-color: white;
     border-radius: 10px;
     display: flex;
+    background: linear-gradient(to bottom, white 0%, rgb(255, 136, 136) 100%);
 }
 
 #ImageContainer {
@@ -25,6 +26,7 @@
     width: 50%;
     height: 100%;
     border-radius: 0px 10px 10px 0px;
+    overflow: hidden;
 }
 
 #StatContainer header {
@@ -32,7 +34,7 @@
     align-items: flex-start;
     flex-direction: column;
     padding-top: 10px;
-    padding-bottom: 20px;
+    padding-bottom: 5px;
 }
 
 #StatContainer header h1,
@@ -41,13 +43,23 @@
     padding: 0;
 }
 
+#StatContainer header h1{
+    font-size: 6vh;
+}
+
+#StatContainer header h2{
+    font-size: 4vh;
+}
+
+
 #StatGrid {
     display: grid;
     align-items: start;
-    gap: 20px;
+    gap: 3%;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, auto);
 }
+
 
 #StatGrid section {
     display: flex;
@@ -64,4 +76,75 @@
 
 #StatGrid section li {
     list-style: none;
+}
+
+#StatGrid section h3{
+    font-size: 3vh;
+}
+
+#StatGrid section p{
+    font-size: 2vh;
+}
+
+#StatGrid section ul{
+    font-size: 2vh;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    #PokemonCardContainer {
+        height: 60vh;
+        aspect-ratio: 3/5;
+        flex-direction: column;
+    }
+
+    #ImageContainer {
+        height: 50%;
+        width: 100%;
+        border-radius: 10px 10px 0px 0px;
+    }
+
+    #PokemonCardContainer img {
+        height: 80%;
+    }
+
+    #StatContainer {
+        width: 100%;
+        height: 50%;
+        border-radius: 0px 0px 10px 10px;
+    }
+
+    #StatContainer header {
+        padding-left: 20px;
+        padding-bottom: 5px;
+    }
+
+    #StatContainer header h1{
+        font-size: 2.8vh;
+    }
+
+    #StatContainer header h2{
+        font-size: 2vh;
+    }
+    
+    #StatGrid {
+        padding-left: 20px;
+    }
+
+    #StatGrid section h3{
+        font-size: 1.8vh;
+    }
+
+    #StatGrid section p{
+        font-size: 1.5vh;
+    }
+
+    #StatGrid section ul{
+        font-size: 1.5vh;
+    }
+}
+
+@media (max-aspect-ratio: 1/2) {
+    #PokemonCardContainer {
+        aspect-ratio: 1/2;
+    }
 }
