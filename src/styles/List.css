@@ -9,7 +9,7 @@
     background-color: #303030;
     border: 1px solid #1a1a1a;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px #000000;
     max-height: 85vh;
     overflow-y: auto;
     transition: max-height 0.3s ease-out;
@@ -30,7 +30,7 @@
 
 .list li.selected {
     background-color: #af4c4c;
-    color: white;
+    color: #ffffff;
 }
 
 .list li:last-child {

@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { PokeAPI } from "pokeapi-types";
 import { Requests } from "./api/Requests";
 import "./Test.css";
+import List from "./components/List";
 
 export const TestComponent = ({
     limit,
@@ -27,16 +28,19 @@ export const TestComponent = ({
     if (error) return <div>Error fetching Pokémon data</div>;
 
     return (
-        <div className="pokemonCollection">
-            {data?.map((pokemon) => (
-                <div key={pokemon.id}>
-                    <h3>{capitalizeFirstLetter(pokemon.name)}</h3>
-                    <img
-                        src={pokemon.sprites.front_default}
-                        alt={pokemon.name}
-                    />
-                </div>
-            ))}
+        <div>
+            <div className="pokemonCollection">
+                {data?.map((pokemon) => (
+                    <div key={pokemon.id}>
+                        <h3>{capitalizeFirstLetter(pokemon.name)}</h3>
+                        <img
+                            src={pokemon.sprites.front_default}
+                            alt={pokemon.name}
+                        />
+                    </div>
+                ))}
+            </div>
+            <List pokemonData={data} />
         </div>
     );
 };
