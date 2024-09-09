@@ -1,11 +1,31 @@
+import { useQuery } from "@tanstack/react-query";
+import { PokeAPI } from "pokeapi-types";
+import { Requests } from "../api/Requests";
 import React, { useState } from "react";
 import "../styles/List.css";
 
 interface ListProps {
-    items: string[];
+    limit: number;
+    offset: number;
 }
 
-const List: React.FC<ListProps> = ({ items }) => {
+const List: React.FC<ListProps> = ({ limit, offset }) => {
+    function fetchData(): Promise<PokeAPI.Pokemon[]> {
+        return Requests.getPokemonSliceAllData(limit, offset);
+    }
+
+    function capitalizeFirstLetter(string: string): string {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    const { data, error, isLoading } = useQuery({
+        queryKey: ["pokemon", "allData", limit, offset],
+        queryFn: fetchData,
+    });
+
+    if (isLoading) return <div>Loading...</div>;
+    if (error) return <div>Error fetching Pokémon data</div>;
+
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -29,13 +49,19 @@ const List: React.FC<ListProps> = ({ items }) => {
             </div>
 
             <ul className={`list ${isMenuOpen ? "active" : ""}`}>
-                {items.map((item, index) => (
+                {data?.map((pokemon) => (
                     <li
-                        key={index}
-                        className={selectedIndex == index ? "selected" : ""}
-                        onClick={() => handleItemClick(index)}
+                        key={pokemon.id}
+                        className={
+                            selectedIndex == pokemon.id ? "selected" : ""
+                        }
+                        onClick={() => handleItemClick(pokemon.id)}
                     >
-                        {item}
+                        <img
+                            src={pokemon.sprites.front_default}
+                            alt={pokemon.name}
+                        />
+                        {capitalizeFirstLetter(pokemon.name)}
                     </li>
                 ))}
             </ul>
