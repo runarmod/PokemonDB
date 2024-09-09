@@ -3,7 +3,7 @@ import { PokeAPI } from "pokeapi-types";
 import queryClient from "./queryClientConfig";
 
 export class Requests {
-    static readonly url: string = "https://pokeapi.co/api/v2/";
+    static readonly #url: string = "https://pokeapi.co/api/v2/";
 
     static async getPokemonById(id: number): Promise<PokeAPI.Pokemon> {
         // Do extra cache check, as this method will likely be called
@@ -15,7 +15,7 @@ export class Requests {
         }
 
         return axios
-            .get(this.url + "pokemon/" + id)
+            .get(this.#url + "pokemon/" + id)
             .then((result: AxiosResponse<PokeAPI.Pokemon>) => {
                 queryClient.setQueryData(["pokemon", "id", id], result.data);
                 return result.data;
@@ -32,7 +32,7 @@ export class Requests {
         }
 
         return axios
-            .get(this.url + "pokemon/" + name)
+            .get(this.#url + "pokemon/" + name)
             .then((result: AxiosResponse<PokeAPI.Pokemon>) => {
                 queryClient.setQueryData(
                     ["pokemon", "name", name],
@@ -47,7 +47,7 @@ export class Requests {
         offset: number = 0
     ): Promise<PokeAPI.NamedAPIResource[]> {
         return axios
-            .get(this.url + "pokemon", {
+            .get(this.#url + "pokemon", {
                 params: {
                     limit: limit,
                     offset: offset,
