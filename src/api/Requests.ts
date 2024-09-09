@@ -1,21 +1,43 @@
 import axios, { AxiosResponse } from "axios";
 import { PokeAPI } from "pokeapi-types";
+import queryClient from "./queryClientConfig";
 
 export class Requests {
     static readonly url: string = "https://pokeapi.co/api/v2/";
 
     static async getPokemonById(id: number): Promise<PokeAPI.Pokemon> {
+        // Do extra cache check, as this method will likely be called
+        // sometimes without using `useQuery`
+        const cachedData: PokeAPI.Pokemon | undefined =
+            queryClient.getQueryData(["pokemon", "id", id]);
+        if (cachedData) {
+            return cachedData;
+        }
+
         return axios
             .get(this.url + "pokemon/" + id)
             .then((result: AxiosResponse<PokeAPI.Pokemon>) => {
+                queryClient.setQueryData(["pokemon", "id", id], result.data);
                 return result.data;
             });
     }
 
     static async getPokemonByName(name: string): Promise<PokeAPI.Pokemon> {
+        // Do extra cache check, as this method will likely be called
+        // sometimes without using `useQuery`
+        const cachedData: PokeAPI.Pokemon | undefined =
+            queryClient.getQueryData(["pokemon", "name", name]);
+        if (cachedData) {
+            return cachedData;
+        }
+
         return axios
             .get(this.url + "pokemon/" + name)
             .then((result: AxiosResponse<PokeAPI.Pokemon>) => {
+                queryClient.setQueryData(
+                    ["pokemon", "name", name],
+                    result.data
+                );
                 return result.data;
             });
     }

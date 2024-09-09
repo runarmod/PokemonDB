@@ -1,16 +1,7 @@
 import "./App.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { QueryClientProvider } from "@tanstack/react-query";
 import { TestComponent } from "./TestComponent";
-
-// We know that the API data is static, so we will do as little fetching as possible
-const queryClient = new QueryClient({
-    defaultOptions: {
-        queries: {
-            staleTime: Infinity,
-            gcTime: Infinity,
-        },
-    },
-});
+import queryClient from "./api/queryClientConfig";
 
 function App() {
     return (
