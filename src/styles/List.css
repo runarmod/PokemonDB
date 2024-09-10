@@ -7,7 +7,6 @@
     left: 20px;
     top: 50px;
     background-color: #303030;
-    border: 1px solid #1a1a1a;
     border-radius: 8px;
     box-shadow: 0 4px 8px #000000;
     max-height: 85vh;
@@ -25,7 +24,7 @@
 }
 
 .list li:hover {
-    background-color: #636363;
+    background-color: #4a4a4a;
 }
 
 .list li.selected {
@@ -83,25 +82,12 @@
 
 @media (max-width: 800px) {
     .list {
-        list-style-type: none;
-        padding-left: 0;
-        margin: 0;
-        left: 20px;
-        top: 50px;
         max-height: 0;
-        background-color: #303030;
-        border: none;
-        border-radius: 8px;
-        position: absolute;
-        overflow-y: auto;
-        width: 200px;
         transition: max-height 0.3s ease-out;
     }
 
     .list.active {
         max-height: 85vh;
-        overflow-y: auto;
-        border: 1px solid #1a1a1a;
     }
 
     .hamburger {
@@ -120,22 +106,34 @@
 }
 
 .list::-webkit-scrollbar {
-    width: 16px;
+    width: 7px;
+}
+
+.list:hover::-webkit-scrollbar {
+    width: 11px;
 }
 
 .list::-webkit-scrollbar-track {
     background: #303030;
-    border-left: 1px solid #434343;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.list:hover::-webkit-scrollbar-track {
+    background: #202020;
 }
 
 .list::-webkit-scrollbar-thumb {
-    background: #515151;
-    border-top-right-radius: 7px;
-    border-bottom-right-radius: 7px;
+    background: #7c7c7c;
+    border-radius: 10px;
+    border: 2px solid #303030;
+}
+
+.list:hover::-webkit-scrollbar-thumb {
+    background: #7c7c7c;
+    border: 3px solid #202020;
 }
 
 .list::-webkit-scrollbar-thumb:hover {
-    background: #676767;
+    background: #999999;
 }

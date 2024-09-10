@@ -16,6 +16,9 @@ const List: React.FC<ListProps> = ({ pokemonData }) => {
 
     const handleItemClick = (index: number) => {
         setSelectedIndex(index);
+        if (window.innerWidth <= 800) {
+            toggleMenu();
+        }
     };
 
     const toggleMenu = () => {
