@@ -2,9 +2,15 @@
     height: 50vh;
     aspect-ratio: 5/3;
     background-color: white;
+    color: #213547;
+    border: 1px solid #213547;
     border-radius: 10px;
     display: flex;
-    background: linear-gradient(to bottom, white 0%, rgb(255, 136, 136) 100%);
+    background: linear-gradient(
+        to bottom,
+        rgb(254, 235, 235) 0%,
+        rgb(255, 121, 121) 100%
+    );
 }
 
 #ImageContainer {
@@ -18,7 +24,7 @@
 }
 
 #PokemonCardContainer img {
-    height: 60%;
+    height: 75%;
     padding: 10px;
 }
 
@@ -29,37 +35,36 @@
     overflow: hidden;
 }
 
-#StatContainer header {
+#StatContainer > section {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     padding-top: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 20px;
 }
 
-#StatContainer header h1,
-#StatContainer header h2 {
+#StatContainer > section > h1,
+#StatContainer > section > h2 {
     margin: 0;
     padding: 0;
 }
 
-#StatContainer header h1{
+#StatContainer > section > h1 {
     font-size: 6vh;
 }
 
-#StatContainer header h2{
+#StatContainer > section > h2 {
     font-size: 4vh;
 }
-
 
 #StatGrid {
     display: grid;
     align-items: start;
     gap: 3%;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, auto);
+    grid-template-rows: repeat(2, auto);
+    row-gap: 20%;
 }
-
 
 #StatGrid section {
     display: flex;
@@ -78,15 +83,15 @@
     list-style: none;
 }
 
-#StatGrid section h3{
+#StatGrid section h3 {
     font-size: 3vh;
 }
 
-#StatGrid section p{
+#StatGrid section p {
     font-size: 2vh;
 }
 
-#StatGrid section ul{
+#StatGrid section ul {
     font-size: 2vh;
 }
 
@@ -113,32 +118,32 @@
         border-radius: 0px 0px 10px 10px;
     }
 
-    #StatContainer header {
+    #StatContainer > section {
         padding-left: 20px;
         padding-bottom: 5px;
     }
 
-    #StatContainer header h1{
+    #StatContainer > section > h1 {
         font-size: 2.8vh;
     }
 
-    #StatContainer header h2{
+    #StatContainer > section > h2 {
         font-size: 2vh;
     }
-    
+
     #StatGrid {
         padding-left: 20px;
     }
 
-    #StatGrid section h3{
+    #StatGrid section h3 {
         font-size: 1.8vh;
     }
 
-    #StatGrid section p{
+    #StatGrid section p {
         font-size: 1.5vh;
     }
 
-    #StatGrid section ul{
+    #StatGrid section ul {
         font-size: 1.5vh;
     }
 }
