@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import { PokeAPI } from "pokeapi-types";
 import { Requests } from "../api/Requests";
 import "./Test.css";
-import List from "./components/List";
 
 export const TestComponent = ({
     limit,
@@ -40,7 +39,6 @@ export const TestComponent = ({
                     </div>
                 ))}
             </div>
-            <List pokemonData={data} />
         </div>
     );
 };
