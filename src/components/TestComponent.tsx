@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { PokeAPI } from "pokeapi-types";
-import { Requests } from "./api/Requests";
+import { Requests } from "../api/Requests";
 import "./Test.css";
 import List from "./components/List";
 
