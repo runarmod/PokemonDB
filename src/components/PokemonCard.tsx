@@ -4,11 +4,8 @@ import { PokeAPI } from "pokeapi-types";
 import { useQuery } from "@tanstack/react-query";
 
 const PokemonCard = ({ id }: { id: number }) => {
-    function capitalizeFirstLetter(string: string | undefined): string {
-        if (string) {
-            return string.charAt(0).toUpperCase() + string.slice(1);
-        }
-        return "";
+    function capitalizeFirstLetter(string: string): string {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     function formatId(id: number): string {
@@ -25,68 +22,53 @@ const PokemonCard = ({ id }: { id: number }) => {
     });
 
     if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error fetching Pokémon data</div>;
+    if (error || data == undefined)
+        return <div>Error fetching Pokémon data</div>;
 
     return (
         <article id="PokemonCardContainer">
             <figure id="ImageContainer">
                 <img
-                    src={data?.sprites.front_default}
-                    alt={`${capitalizeFirstLetter(data?.name)} image`}
+                    src={data.sprites.front_default}
+                    alt={`${capitalizeFirstLetter(data.name)} image`}
                 />
             </figure>
             <div id="StatContainer">
                 <section>
-                    <h1>{capitalizeFirstLetter(data?.name)}</h1>
+                    <h1>{capitalizeFirstLetter(data.name)}</h1>
                     <h2 style={{ opacity: 0.5 }}>{formatId(id)}</h2>
                 </section>
                 <div id="StatGrid">
                     <section>
                         <h3>Height</h3>
-                        <p>
-                            {data?.height
-                                ? `${data.height * 10} cm`
-                                : "Undefined"}
-                        </p>
+                        <p>{data.height * 10} cm</p>
                     </section>
                     <section>
                         <h3>Weight</h3>
-                        <p>
-                            {data?.weight
-                                ? `${data.weight / 10} kg`
-                                : "Undefined"}
-                        </p>
+                        <p>{data.weight / 10} kg</p>
                     </section>
                     <section>
                         <h3>Types</h3>
                         <ul>
-                            {data ? (
-                                data.types.map((pokemonType, index) => (
-                                    <li key={index}>
-                                        {capitalizeFirstLetter(
-                                            pokemonType.type.name
-                                        )}
-                                    </li>
-                                ))
-                            ) : (
-                                <li>Undefined</li>
-                            )}
+                            {data.types.map((pokemonType) => (
+                                <li key={pokemonType.type.name}>
+                                    {capitalizeFirstLetter(
+                                        pokemonType.type.name
+                                    )}
+                                </li>
+                            ))}
                         </ul>
                     </section>
                     <section>
                         <h3>Abilities</h3>
                         <ul>
-                            {data ? (
-                                data.abilities.map((pokemonAbility, index) => (
-                                    <li key={index}>
-                                        {capitalizeFirstLetter(
-                                            pokemonAbility.ability.name
-                                        )}
-                                    </li>
-                                ))
-                            ) : (
-                                <li>Undefined</li>
-                            )}
+                            {data.abilities.map((pokemonAbility) => (
+                                <li key={pokemonAbility.ability.name}>
+                                    {capitalizeFirstLetter(
+                                        pokemonAbility.ability.name
+                                    )}
+                                </li>
+                            ))}
                         </ul>
                     </section>
                 </div>
