@@ -81,10 +81,12 @@
     height: 4px;
     background-color: #616161;
     border-radius: 5px;
-    transition: transform 0.3s, opacity 0.3s;
+    transition:
+        transform 0.3s,
+        opacity 0.3s;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
     .list {
         max-height: 0;
         transition: max-height 0.3s ease-out;

@@ -1,17 +1,26 @@
 import { useState } from "react";
 import { PokeAPI } from "pokeapi-types";
-import "../styles/List.css";
+import "../styles/PokemonList.css";
 import { Requests } from "../api/Requests";
 import { useQuery } from "@tanstack/react-query";
-import PokemonCard from "./PokemonCard";
+import { capitalizeFirstLetter } from "../utils";
 
-const List = ({ limit, offset }: { limit: number; offset: number }) => {
+const PokemonList = ({
+    limit,
+    offset,
+    onPokemonSelect,
+}: {
+    limit: number;
+    offset: number;
+    onPokemonSelect: (id: number) => void;
+}) => {
     const [selectedIndex, setSelectedIndex] = useState(1);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleItemClick = (index: number) => {
         setSelectedIndex(index);
-        if (window.innerWidth <= 800) {
+        onPokemonSelect(index);
+        if (window.innerWidth <= 900) {
             toggleMenu();
         }
     };
@@ -24,17 +33,14 @@ const List = ({ limit, offset }: { limit: number; offset: number }) => {
         return Requests.getPokemonSliceAllData(limit, offset);
     }
 
-    function capitalizeFirstLetter(string: string): string {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
     const { data, error, isLoading } = useQuery({
         queryKey: ["pokemon", "allData", limit, offset],
         queryFn: fetchData,
     });
 
     if (isLoading) return <div>Loading...</div>;
-    if (error) return <div>Error fetching Pokémon data</div>;
+    if (error || data == undefined)
+        return <div>Error fetching Pokémon data</div>;
 
     return (
         <>
@@ -48,7 +54,7 @@ const List = ({ limit, offset }: { limit: number; offset: number }) => {
             </section>
 
             <ul className={`list ${isMenuOpen ? "active" : ""}`}>
-                {data?.map((pokemon) => (
+                {data.map((pokemon) => (
                     <li
                         key={pokemon.id}
                         className={
@@ -64,9 +70,8 @@ const List = ({ limit, offset }: { limit: number; offset: number }) => {
                     </li>
                 ))}
             </ul>
-            {<PokemonCard id={selectedIndex} />}
         </>
     );
 };
 
-export default List;
+export default PokemonList;
