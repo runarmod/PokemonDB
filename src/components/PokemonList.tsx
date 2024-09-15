@@ -1,25 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { PokeAPI } from "pokeapi-types";
 import "../styles/PokemonList.css";
 import { Requests } from "../api/Requests";
 import { useQuery } from "@tanstack/react-query";
-import { capitalizeFirstLetter } from "../utils";
+import { capitalizeFirstLetter, sortingMap } from "../utils";
+import { Context } from "./ContextProvider";
 
-const PokemonList = ({
-    limit,
-    offset,
-    onPokemonSelect,
-}: {
-    limit: number;
-    offset: number;
-    onPokemonSelect: (id: number) => void;
-}) => {
-    const [selectedIndex, setSelectedIndex] = useState(1);
+const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
+    const { selectedPokemonId, changeSelectedPokemonId, sortingOrder } = useContext(Context);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleItemClick = (index: number) => {
-        setSelectedIndex(index);
-        onPokemonSelect(index);
+        changeSelectedPokemonId(index);
         if (window.innerWidth <= 900) {
             toggleMenu();
         }
@@ -55,15 +47,15 @@ const PokemonList = ({
             </button>
 
             <ul className={`list ${isMenuOpen ? "active" : ""}`}>
-                {data.map((pokemon) => (
+                {data.sort(sortingMap.get(sortingOrder)).map((pokemon) => (
                     <li
                         key={pokemon.id}
                         className={
-                            selectedIndex == pokemon.id ? "selected" : ""
+                            selectedPokemonId == pokemon.id ? "selected" : ""
                         }
                         onClick={() => handleItemClick(pokemon.id)}
                         role="button"
-                        aria-pressed={selectedIndex == pokemon.id}
+                        aria-pressed={selectedPokemonId == pokemon.id}
                         tabIndex={0}
                         onKeyDown={(e) => {
                             if (e.key == "Enter" || e.key == " ") {

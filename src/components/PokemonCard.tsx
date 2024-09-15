@@ -3,18 +3,22 @@ import { Requests } from "../api/Requests";
 import { PokeAPI } from "pokeapi-types";
 import { useQuery } from "@tanstack/react-query";
 import { capitalizeFirstLetter } from "../utils";
+import { useContext } from "react";
+import { Context } from "./ContextProvider";
 
-const PokemonCard = ({ id }: { id: number }) => {
+const PokemonCard = () => {
+    const { selectedPokemonId } = useContext(Context);
+
     function formatId(id: number): string {
         return `#${id.toString().padStart(4, "0")}`;
     }
 
     function fetchData(): Promise<PokeAPI.Pokemon> {
-        return Requests.getPokemonById(id);
+        return Requests.getPokemonById(selectedPokemonId);
     }
 
     const { data, error, isLoading } = useQuery({
-        queryKey: ["pokemon", "id", id],
+        queryKey: ["pokemon", "id", selectedPokemonId],
         queryFn: fetchData,
     });
 
@@ -33,7 +37,9 @@ const PokemonCard = ({ id }: { id: number }) => {
             <div id="StatContainer">
                 <section>
                     <h1>{capitalizeFirstLetter(data.name)}</h1>
-                    <h2 style={{ opacity: 0.5 }}>{formatId(id)}</h2>
+                    <h2 style={{ opacity: 0.5 }}>
+                        {formatId(selectedPokemonId)}
+                    </h2>
                 </section>
                 <div id="StatGrid">
                     <section>
