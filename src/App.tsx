@@ -14,10 +14,7 @@ function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <PokemonList
-                limit={15}
-                onPokemonSelect={handlePokemonSelect}
-            />
+            <PokemonList limit={15} onPokemonSelect={handlePokemonSelect} />
             <PokemonCard id={selectedPokemonId} />
         </QueryClientProvider>
     );

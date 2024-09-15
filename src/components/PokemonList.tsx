@@ -1,8 +1,8 @@
-import { useState } from "react";
-import { PokeAPI } from "pokeapi-types";
-import "../styles/PokemonList.css";
-import { Requests } from "../api/Requests";
 import { useInfiniteQuery } from "@tanstack/react-query";
+import { PokeAPI } from "pokeapi-types";
+import { useState } from "react";
+import { Requests } from "../api/Requests";
+import "../styles/PokemonList.css";
 import { capitalizeFirstLetter } from "../utils";
 
 const PokemonList = ({
@@ -95,6 +95,13 @@ const PokemonList = ({
                         }
                     }}
                 >
+                    <img
+                        src="src/assets/refresh.png"
+                        alt="Refresh icon"
+                        className={
+                            isFetchingNextPage ? "loading refresh" : "refresh"
+                        }
+                    />
                     {isFetchingNextPage ? "Loading more..." : "Load More"}
                 </li>
             </ul>
