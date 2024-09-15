@@ -7,19 +7,23 @@ import StarIcon from "@mui/icons-material/Star";
 import { useEffect, useState } from "react";
 
 const PokemonCard = ({ id }: { id: number }) => {
-    const [favorites, setFavorites] = useState<string[]>([])
+    const [favorites, setFavorites] = useState<string[]>([]);
 
     useEffect(() => {
-        const favoriteList = JSON.parse(localStorage.getItem("favorites") || "[]");
+        const favoriteList = JSON.parse(
+            localStorage.getItem("favorites") || "[]"
+        );
         setFavorites(favoriteList);
-    }, [])
+    }, []);
 
     function handleFavorite(): void {
         let updatedFavorites: string[] = [];
         if (favorites.includes(id.toString())) {
-            updatedFavorites = favorites.filter((favorite: string) => favorite !== id.toString());
+            updatedFavorites = favorites.filter(
+                (favorite: string) => favorite !== id.toString()
+            );
         } else {
-            updatedFavorites = [...favorites, id.toString()]
+            updatedFavorites = [...favorites, id.toString()];
         }
         localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
         setFavorites(updatedFavorites);
@@ -46,7 +50,14 @@ const PokemonCard = ({ id }: { id: number }) => {
         <article id="PokemonCardContainer">
             <figure id="ImageContainer">
                 <button id="favoritesButton" onClick={handleFavorite}>
-                    <StarIcon sx={{ fontSize: 30, color: favorites.includes(id.toString()) ? '#C62828' : '#303030' }}/>
+                    <StarIcon
+                        sx={{
+                            fontSize: 30,
+                            color: favorites.includes(id.toString())
+                                ? "#C62828"
+                                : "#303030",
+                        }}
+                    />
                 </button>
                 <img
                     src={data.sprites.front_default}
