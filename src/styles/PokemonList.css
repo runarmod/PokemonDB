@@ -74,9 +74,16 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
 }
 
-.hamburger div {
+.hamburger:focus {
+    outline: none;
+}
+
+.hamburger .hamburgerLine {
     width: 100%;
     height: 4px;
     background-color: #616161;
@@ -101,13 +108,13 @@
     }
 }
 
-.hamburger.active div:nth-child(1) {
+.hamburger.active .hamburgerLine:nth-child(1) {
     transform: translateY(10px) rotate(45deg) scale(1.1);
 }
-.hamburger.active div:nth-child(2) {
+.hamburger.active .hamburgerLine:nth-child(2) {
     opacity: 0;
 }
-.hamburger.active div:nth-child(3) {
+.hamburger.active .hamburgerLine:nth-child(3) {
     transform: translateY(-10px) rotate(-45deg) scale(1.1);
 }
 

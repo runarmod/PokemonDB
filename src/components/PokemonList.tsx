@@ -44,14 +44,15 @@ const PokemonList = ({
 
     return (
         <>
-            <section
+            <button
                 className={`hamburger ${isMenuOpen ? "active" : ""}`}
+                aria-label="Toggle Menu"
                 onClick={toggleMenu}
             >
-                <div></div>
-                <div></div>
-                <div></div>
-            </section>
+                <div className="hamburgerLine"></div>
+                <div className="hamburgerLine"></div>
+                <div className="hamburgerLine"></div>
+            </button>
 
             <ul className={`list ${isMenuOpen ? "active" : ""}`}>
                 {data.map((pokemon) => (
@@ -61,6 +62,14 @@ const PokemonList = ({
                             selectedIndex == pokemon.id ? "selected" : ""
                         }
                         onClick={() => handleItemClick(pokemon.id)}
+                        role="button"
+                        aria-pressed={selectedIndex == pokemon.id}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key == "Enter" || e.key == " ") {
+                                handleItemClick(pokemon.id);
+                            }
+                        }}
                     >
                         <img
                             src={pokemon.sprites.front_default}
