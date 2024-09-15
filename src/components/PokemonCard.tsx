@@ -2,12 +2,9 @@ import "../styles/PokemonCard.css";
 import { Requests } from "../api/Requests";
 import { PokeAPI } from "pokeapi-types";
 import { useQuery } from "@tanstack/react-query";
+import { capitalizeFirstLetter } from "../utils";
 
 const PokemonCard = ({ id }: { id: number }) => {
-    function capitalizeFirstLetter(string: string): string {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
     function formatId(id: number): string {
         return `#${id.toString().padStart(4, "0")}`;
     }

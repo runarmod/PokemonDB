@@ -5,6 +5,7 @@
     color: #213547;
     border: 1px solid #213547;
     border-radius: 10px;
+    box-shadow: 0 15px 30px #101010;
     display: flex;
     background: linear-gradient(
         to bottom,
