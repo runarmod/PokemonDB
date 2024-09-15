@@ -15,6 +15,7 @@
 }
 
 #ImageContainer {
+    position: relative;
     height: 100%;
     width: 50%;
     border-radius: 10px 0px 0px 10px;
@@ -22,6 +23,22 @@
     justify-content: center;
     align-items: center;
     margin: 0px;
+}
+
+#favoritesButton {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: none;
+    border: none;
+    padding: 0px;
+}
+#favoritesButton:hover {
+    transform: scale(1.1);
+}
+#favoritesButton:focus,
+#favoritesButton:focus-visible {
+    outline: none;
 }
 
 #PokemonCardContainer img {
