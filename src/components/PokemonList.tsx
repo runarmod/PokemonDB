@@ -28,20 +28,26 @@ const PokemonList = ({
         setIsMenuOpen(!isMenuOpen);
     };
 
-    function fetchPage(pageNr: number): Promise<PokeAPI.Pokemon[]> {
-        setOffset(pageNr * limit);
+    function getNextPage(): Promise<PokeAPI.Pokemon[]> {
+        setOffset(offset + limit);
         return Requests.getPokemonSliceAllData(limit, offset);
     }
 
-    const { data, fetchNextPage, isFetchingNextPage, error, isLoading } =
-        useInfiniteQuery({
-            queryKey: ["pokemon", "allData"],
-            queryFn: ({ pageParam }) => fetchPage(pageParam),
-            initialPageParam: 1,
-            getNextPageParam: (_lastPage, allPages) => {
-                return allPages.length + 1;
-            },
-        });
+    const {
+        data,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        error,
+        isLoading,
+    } = useInfiniteQuery({
+        queryKey: ["pokemon", "allData"],
+        queryFn: getNextPage,
+        initialPageParam: 1,
+        getNextPageParam: (_lastPage, allPages) => {
+            return offset > 1301 ? undefined : allPages.length + 1; // Last pokemon is known to have offset 1301
+        },
+    });
 
     if (isLoading) return <div>Loading...</div>;
     if (error || data == undefined)
@@ -60,50 +66,52 @@ const PokemonList = ({
             </button>
 
             <ul className={`list ${isMenuOpen ? "active" : ""}`}>
-                {data?.pages
-                    .flatMap((page) => page)
-                    .map((pokemon) => (
-                        <li
-                            key={pokemon.id}
-                            className={
-                                selectedIndex == pokemon.id ? "selected" : ""
-                            }
-                            onClick={() => handleItemClick(pokemon.id)}
-                            role="button"
-                            aria-pressed={selectedIndex == pokemon.id}
-                            tabIndex={0}
-                            onKeyDown={(e) => {
-                                if (e.key == "Enter" || e.key == " ") {
-                                    handleItemClick(pokemon.id);
-                                }
-                            }}
-                        >
-                            <img
-                                src={pokemon.sprites.front_default}
-                                alt={`${capitalizeFirstLetter(pokemon.name)} image`}
-                            />
-                            {capitalizeFirstLetter(pokemon.name)}
-                        </li>
-                    ))}
-                <li
-                    onClick={() => fetchNextPage()}
-                    role="button"
-                    aria-pressed={isFetchingNextPage}
-                    onKeyDown={(e) => {
-                        if (e.key == "Enter" || e.key == " ") {
-                            fetchNextPage();
-                        }
-                    }}
-                >
-                    <img
-                        src="src/assets/refresh.png"
-                        alt="Refresh icon"
+                {data?.pages.flat().map((pokemon) => (
+                    <li
+                        key={pokemon.id}
                         className={
-                            isFetchingNextPage ? "loading refresh" : "refresh"
+                            selectedIndex == pokemon.id ? "selected" : ""
                         }
-                    />
-                    {isFetchingNextPage ? "Loading more..." : "Load More"}
-                </li>
+                        onClick={() => handleItemClick(pokemon.id)}
+                        role="button"
+                        aria-pressed={selectedIndex == pokemon.id}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key == "Enter" || e.key == " ") {
+                                handleItemClick(pokemon.id);
+                            }
+                        }}
+                    >
+                        <img
+                            src={pokemon.sprites.front_default}
+                            alt={`${capitalizeFirstLetter(pokemon.name)} image`}
+                        />
+                        {capitalizeFirstLetter(pokemon.name)}
+                    </li>
+                ))}
+                {hasNextPage && (
+                    <li
+                        onClick={() => fetchNextPage()}
+                        role="button"
+                        aria-pressed={isFetchingNextPage}
+                        onKeyDown={(e) => {
+                            if (e.key == "Enter" || e.key == " ") {
+                                fetchNextPage();
+                            }
+                        }}
+                    >
+                        <img
+                            src="src/assets/refresh.png"
+                            alt="Refresh icon"
+                            className={
+                                isFetchingNextPage
+                                    ? "loading refresh"
+                                    : "refresh"
+                            }
+                        />
+                        {isFetchingNextPage ? "Loading more..." : "Load More"}
+                    </li>
+                )}
             </ul>
         </>
     );
