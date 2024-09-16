@@ -1,21 +1,21 @@
-import { useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { PokeAPI } from "pokeapi-types";
-import "../styles/PokemonList.css";
+import { useState } from "react";
 import { Requests } from "../api/Requests";
-import { useQuery } from "@tanstack/react-query";
+import "../styles/PokemonList.css";
 import { capitalizeFirstLetter } from "../utils";
 
 const PokemonList = ({
     limit,
-    offset,
     onPokemonSelect,
 }: {
     limit: number;
-    offset: number;
     onPokemonSelect: (id: number) => void;
 }) => {
     const [selectedIndex, setSelectedIndex] = useState(1);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [offset, setOffset] = useState(0);
+    const lastInterestingPokemonId = 1025;
 
     const handleItemClick = (index: number) => {
         setSelectedIndex(index);
@@ -29,13 +29,31 @@ const PokemonList = ({
         setIsMenuOpen(!isMenuOpen);
     };
 
-    function fetchData(): Promise<PokeAPI.Pokemon[]> {
-        return Requests.getPokemonSliceAllData(limit, offset);
+    function getNextPage(): Promise<PokeAPI.Pokemon[]> {
+        setOffset(offset + limit);
+        return Requests.getPokemonSliceAllData(
+            limit,
+            offset,
+            lastInterestingPokemonId + 1
+        );
     }
 
-    const { data, error, isLoading } = useQuery({
-        queryKey: ["pokemon", "allData", limit, offset],
-        queryFn: fetchData,
+    const {
+        data,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        error,
+        isLoading,
+    } = useInfiniteQuery({
+        queryKey: ["pokemon", "allData"],
+        queryFn: getNextPage,
+        initialPageParam: 1,
+        getNextPageParam: (_lastPage, allPages) => {
+            return offset >= lastInterestingPokemonId
+                ? undefined
+                : allPages.length + 1;
+        },
     });
 
     if (isLoading) return <div>Loading...</div>;
@@ -55,7 +73,7 @@ const PokemonList = ({
             </button>
 
             <ul className={`list ${isMenuOpen ? "active" : ""}`}>
-                {data.map((pokemon) => (
+                {data?.pages.flat().map((pokemon) => (
                     <li
                         key={pokemon.id}
                         className={
@@ -78,6 +96,29 @@ const PokemonList = ({
                         {capitalizeFirstLetter(pokemon.name)}
                     </li>
                 ))}
+                {hasNextPage && (
+                    <li
+                        onClick={() => fetchNextPage()}
+                        role="button"
+                        aria-pressed={isFetchingNextPage}
+                        onKeyDown={(e) => {
+                            if (e.key == "Enter" || e.key == " ") {
+                                fetchNextPage();
+                            }
+                        }}
+                    >
+                        <img
+                            src="src/assets/refresh.png"
+                            alt="Refresh icon"
+                            className={
+                                isFetchingNextPage
+                                    ? "loading refresh"
+                                    : "refresh"
+                            }
+                        />
+                        {isFetchingNextPage ? "Loading more..." : "Load More"}
+                    </li>
+                )}
             </ul>
         </>
     );

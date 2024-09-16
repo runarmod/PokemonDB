@@ -60,13 +60,25 @@ export class Requests {
 
     static async getPokemonSliceAllData(
         limit: number = 20,
-        offset: number = 0
+        offset: number = 0,
+        ignoreFromId: number = -1
     ): Promise<PokeAPI.Pokemon[]> {
-        const pokemonList = await this.getPokemonSlice(limit, offset);
-        return await Promise.all(
-            pokemonList.map(async (pokemon) => {
-                return Requests.getPokemonByName(pokemon.name);
-            })
+        const pokemonNamesList = await this.getPokemonSlice(limit, offset);
+        const pokemonList = await Promise.all(
+            pokemonNamesList
+                .map((pokemon) => {
+                    const matchResult = pokemon.url.match(/(\d+)\/?$/);
+                    if (!matchResult) {
+                        throw new Error("Error with API data");
+                    }
+                    const id = parseInt(matchResult[1], 10);
+                    return id;
+                })
+                .filter((id) =>
+                    ignoreFromId === -1 ? true : id < ignoreFromId
+                )
+                .map((id) => this.getPokemonById(id))
         );
+        return pokemonList;
     }
 }

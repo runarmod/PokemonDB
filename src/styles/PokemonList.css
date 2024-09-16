@@ -63,6 +63,28 @@
     border-radius: 5px;
 }
 
+.list img.refresh {
+    width: 30px;
+    height: 30px;
+}
+
+.list img.loading {
+    animation: spin 0.25s linear infinite;
+}
+
+.list li:hover > img.refresh {
+    animation: spin 0.25s linear;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 .hamburger {
     display: none;
     position: absolute;
