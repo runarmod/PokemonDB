@@ -15,6 +15,7 @@ const PokemonList = ({
     const [selectedIndex, setSelectedIndex] = useState(1);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [offset, setOffset] = useState(0);
+    const lastInterestingPokemonId = 1025;
 
     const handleItemClick = (index: number) => {
         setSelectedIndex(index);
@@ -30,7 +31,11 @@ const PokemonList = ({
 
     function getNextPage(): Promise<PokeAPI.Pokemon[]> {
         setOffset(offset + limit);
-        return Requests.getPokemonSliceAllData(limit, offset);
+        return Requests.getPokemonSliceAllData(
+            limit,
+            offset,
+            lastInterestingPokemonId + 1
+        );
     }
 
     const {
@@ -45,7 +50,9 @@ const PokemonList = ({
         queryFn: getNextPage,
         initialPageParam: 1,
         getNextPageParam: (_lastPage, allPages) => {
-            return offset > 1301 ? undefined : allPages.length + 1; // Last pokemon is known to have offset 1301
+            return offset >= lastInterestingPokemonId
+                ? undefined
+                : allPages.length + 1;
         },
     });
 
