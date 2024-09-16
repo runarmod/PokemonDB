@@ -1,20 +1,15 @@
-import { ReactNode, createContext, useEffect, useState } from "react";
+import React, { ReactNode, createContext, useEffect, useState } from "react";
 
-//TODO: Find way to remove this dummy data
-export const Context = createContext({
-    selectedPokemonId: 1,
-    changeSelectedPokemonId: (id: number) => {
-        console.log(id);
-    },
-    sortingOrder: "id",
-    changeSortingOrder: (order: string) => {
-        console.log(order);
-    },
-    filters: ["a"],
-    updateFilters: (filter: string) => {
-        console.log(filter);
-    },
-});
+interface AppContextType {
+    selectedPokemonId: number;
+    changeSelectedPokemonId: (id: number) => void;
+    sortingOrder: string;
+    changeSortingOrder: (order: string) => void;
+    filters: string[];
+    updateFilters: (filter: string) => void;
+}
+
+export const AppContext = createContext<AppContextType | null>(null);
 
 interface ContextProviderProps {
     children: ReactNode;
@@ -63,7 +58,7 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     }, []);
 
     return (
-        <Context.Provider
+        <AppContext.Provider
             value={{
                 selectedPokemonId,
                 changeSelectedPokemonId,
@@ -74,7 +69,7 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
             }}
         >
             {children}
-        </Context.Provider>
+        </AppContext.Provider>
     );
 };
 

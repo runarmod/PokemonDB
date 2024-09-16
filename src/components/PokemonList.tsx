@@ -1,10 +1,13 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { PokeAPI } from "pokeapi-types";
 import "../styles/PokemonList.css";
 import { Requests } from "../api/Requests";
 import { useQuery } from "@tanstack/react-query";
-import { capitalizeFirstLetter, filterAndSortPokemon } from "../utils";
-import { Context } from "./ContextProvider";
+import {
+    capitalizeFirstLetter,
+    filterAndSortPokemon,
+    useAppContext,
+} from "../utils";
 
 const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
     const {
@@ -12,7 +15,7 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
         changeSelectedPokemonId,
         sortingOrder,
         filters,
-    } = useContext(Context);
+    } = useAppContext();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleItemClick = (index: number) => {
@@ -46,7 +49,8 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
                 changeSelectedPokemonId(sortedAndFilteredPokemon[0].id);
             }
         }
-    }, [sortingOrder, filters]); //TODO: FIX
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sortingOrder, filters]);
 
     if (isLoading) return <div>Loading...</div>;
     if (error || data == undefined)

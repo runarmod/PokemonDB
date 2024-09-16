@@ -2,12 +2,10 @@ import "../styles/PokemonCard.css";
 import { Requests } from "../api/Requests";
 import { PokeAPI } from "pokeapi-types";
 import { useQuery } from "@tanstack/react-query";
-import { capitalizeFirstLetter } from "../utils";
-import { useContext } from "react";
-import { Context } from "./ContextProvider";
+import { capitalizeFirstLetter, useAppContext } from "../utils";
 
 const PokemonCard = () => {
-    const { selectedPokemonId } = useContext(Context);
+    const { selectedPokemonId } = useAppContext();
 
     function formatId(id: number): string {
         return `#${id.toString().padStart(4, "0")}`;

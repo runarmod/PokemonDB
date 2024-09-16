@@ -1,13 +1,11 @@
-import pokemonTypeColors from "../utils";
+import pokemonTypeColors, { useAppContext } from "../utils";
 import PokemonTypeLabel from "./PokemonTypeLabel";
 import "../styles/SortAndFilter.css";
 import StarIcon from "@mui/icons-material/Star";
-import React, { useContext } from "react";
-import { Context } from "./ContextProvider";
 
 export default function SortAndFilter() {
     const { sortingOrder, changeSortingOrder, updateFilters, filters } =
-        useContext(Context);
+        useAppContext();
 
     function handleRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
         changeSortingOrder(event.target.value);

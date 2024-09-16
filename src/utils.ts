@@ -1,4 +1,6 @@
 import { PokeAPI } from "pokeapi-types";
+import { useContext } from "react";
+import { AppContext } from "./components/ContextProvider";
 
 export function capitalizeFirstLetter(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -53,11 +55,25 @@ export function filterAndSortPokemon(
 ): PokeAPI.Pokemon[] {
     return pokemon
         .filter((p: PokeAPI.Pokemon) => {
+            if (filters.length == 0) {
+                return true;
+            }
             const types: string[] = p.types.map((t) => t.type.name);
             for (let i = 0; i < filters.length; i++) {
-                if (!types.includes(filters[i])) return false;
+                if (types.includes(filters[i])) {
+                    return true;
+                }
             }
-            return true;
+            return false;
         })
         .sort(sortingMap.get(sortingOrder));
 }
+
+//helper function to check if AppContext is null, that means it is used outside a Provider
+export const useAppContext = () => {
+    const context = useContext(AppContext);
+    if (!context) {
+        throw new Error("useAppContext must be used within a Provider");
+    }
+    return context;
+};
