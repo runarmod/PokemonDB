@@ -1,7 +1,6 @@
 import pokemonTypeColors, { useAppContext } from "../utils";
 import PokemonTypeLabel from "./PokemonTypeLabel";
 import "../styles/SortAndFilter.css";
-import StarIcon from "@mui/icons-material/Star";
 
 export default function SortAndFilter() {
     const { sortingOrder, changeSortingOrder, updateFilters, filters } =
@@ -63,7 +62,11 @@ export default function SortAndFilter() {
                         onChange={handleCheckChange}
                         checked={filters.includes("favorite")}
                     />
-                    <StarIcon sx={{ fontSize: 30 }} className="starIcon" />
+                    <img
+                        src="src/assets/star_filled.png"
+                        alt="favorite icon"
+                        id="favoriteIcon"
+                    />
                 </li>
 
                 {Array.from(pokemonTypeColors.keys()).map((type: string) => (

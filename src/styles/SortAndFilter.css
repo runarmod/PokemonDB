@@ -33,3 +33,7 @@ h2 {
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
+#favoriteIcon {
+    width: 20px;
+}
