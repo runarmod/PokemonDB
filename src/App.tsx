@@ -11,7 +11,7 @@ function App() {
         <QueryClientProvider client={queryClient}>
             <ContextProvider>
                 <div id="wrapper">
-                    <PokemonList limit={50} offset={0} />
+                    <PokemonList limit={50} />
                     <PokemonCard />
                     <SortAndFilter />
                 </div>

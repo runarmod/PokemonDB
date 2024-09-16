@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { PokeAPI } from "pokeapi-types";
-import "../styles/PokemonList.css";
+import { useEffect, useState } from "react";
 import { Requests } from "../api/Requests";
-import { useQuery } from "@tanstack/react-query";
+import "../styles/PokemonList.css";
 import {
     capitalizeFirstLetter,
     filterAndSortPokemon,
     useAppContext,
 } from "../utils";
 
-const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
+const PokemonList = ({ limit }: { limit: number }) => {
     const {
         selectedPokemonId,
         changeSelectedPokemonId,
@@ -17,6 +17,8 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
         filters,
     } = useAppContext();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [offset, setOffset] = useState(0);
+    const lastInterestingPokemonId = 1025;
 
     const handleItemClick = (index: number) => {
         changeSelectedPokemonId(index);
@@ -29,19 +31,37 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    function fetchData(): Promise<PokeAPI.Pokemon[]> {
-        return Requests.getPokemonSliceAllData(limit, offset);
+    function getNextPage(): Promise<PokeAPI.Pokemon[]> {
+        setOffset(offset + limit);
+        return Requests.getPokemonSliceAllData(
+            limit,
+            offset,
+            lastInterestingPokemonId + 1
+        );
     }
 
-    const { data, error, isLoading } = useQuery({
-        queryKey: ["pokemon", "allData", limit, offset],
-        queryFn: fetchData,
+    const {
+        data,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+        error,
+        isLoading,
+    } = useInfiniteQuery({
+        queryKey: ["pokemon", "allData"],
+        queryFn: getNextPage,
+        initialPageParam: 1,
+        getNextPageParam: (_lastPage, allPages) => {
+            return offset >= lastInterestingPokemonId
+                ? undefined
+                : allPages.length + 1;
+        },
     });
 
     useEffect(() => {
         if (data !== undefined) {
             const sortedAndFilteredPokemon = filterAndSortPokemon(
-                data,
+                data.pages.flat(),
                 filters,
                 sortingOrder
             );
@@ -69,32 +89,55 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
             </button>
 
             <ul className={`list ${isMenuOpen ? "active" : ""}`}>
-                {filterAndSortPokemon(data, filters, sortingOrder).map(
-                    (pokemon) => (
-                        <li
-                            key={pokemon.id}
-                            className={
-                                selectedPokemonId == pokemon.id
-                                    ? "selected"
-                                    : ""
+                {filterAndSortPokemon(
+                    data.pages.flat(),
+                    filters,
+                    sortingOrder
+                ).map((pokemon) => (
+                    <li
+                        key={pokemon.id}
+                        className={
+                            selectedPokemonId == pokemon.id ? "selected" : ""
+                        }
+                        onClick={() => handleItemClick(pokemon.id)}
+                        role="button"
+                        aria-pressed={selectedPokemonId == pokemon.id}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                            if (e.key == "Enter" || e.key == " ") {
+                                handleItemClick(pokemon.id);
                             }
-                            onClick={() => handleItemClick(pokemon.id)}
-                            role="button"
-                            aria-pressed={selectedPokemonId == pokemon.id}
-                            tabIndex={0}
-                            onKeyDown={(e) => {
-                                if (e.key == "Enter" || e.key == " ") {
-                                    handleItemClick(pokemon.id);
-                                }
-                            }}
-                        >
-                            <img
-                                src={pokemon.sprites.front_default}
-                                alt={`${capitalizeFirstLetter(pokemon.name)} image`}
-                            />
-                            {capitalizeFirstLetter(pokemon.name)}
-                        </li>
-                    )
+                        }}
+                    >
+                        <img
+                            src={pokemon.sprites.front_default}
+                            alt={`${capitalizeFirstLetter(pokemon.name)} image`}
+                        />
+                        {capitalizeFirstLetter(pokemon.name)}
+                    </li>
+                ))}
+                {hasNextPage && (
+                    <li
+                        onClick={() => fetchNextPage()}
+                        role="button"
+                        aria-pressed={isFetchingNextPage}
+                        onKeyDown={(e) => {
+                            if (e.key == "Enter" || e.key == " ") {
+                                fetchNextPage();
+                            }
+                        }}
+                    >
+                        <img
+                            src="src/assets/refresh.png"
+                            alt="Refresh icon"
+                            className={
+                                isFetchingNextPage
+                                    ? "loading refresh"
+                                    : "refresh"
+                            }
+                        />
+                        {isFetchingNextPage ? "Loading more..." : "Load More"}
+                    </li>
                 )}
             </ul>
         </>
