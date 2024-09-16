@@ -1,13 +1,18 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PokeAPI } from "pokeapi-types";
 import "../styles/PokemonList.css";
 import { Requests } from "../api/Requests";
 import { useQuery } from "@tanstack/react-query";
-import { capitalizeFirstLetter, sortingMap } from "../utils";
+import { capitalizeFirstLetter, filterAndSortPokemon } from "../utils";
 import { Context } from "./ContextProvider";
 
 const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
-    const { selectedPokemonId, changeSelectedPokemonId, sortingOrder } = useContext(Context);
+    const {
+        selectedPokemonId,
+        changeSelectedPokemonId,
+        sortingOrder,
+        filters,
+    } = useContext(Context);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const handleItemClick = (index: number) => {
@@ -30,6 +35,19 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
         queryFn: fetchData,
     });
 
+    useEffect(() => {
+        if (data !== undefined) {
+            const sortedAndFilteredPokemon = filterAndSortPokemon(
+                data,
+                filters,
+                sortingOrder
+            );
+            if (sortedAndFilteredPokemon.length) {
+                changeSelectedPokemonId(sortedAndFilteredPokemon[0].id);
+            }
+        }
+    }, [sortingOrder, filters]); //TODO: FIX
+
     if (isLoading) return <div>Loading...</div>;
     if (error || data == undefined)
         return <div>Error fetching Pokémon data</div>;
@@ -47,29 +65,33 @@ const PokemonList = ({ limit, offset }: { limit: number; offset: number }) => {
             </button>
 
             <ul className={`list ${isMenuOpen ? "active" : ""}`}>
-                {data.sort(sortingMap.get(sortingOrder)).map((pokemon) => (
-                    <li
-                        key={pokemon.id}
-                        className={
-                            selectedPokemonId == pokemon.id ? "selected" : ""
-                        }
-                        onClick={() => handleItemClick(pokemon.id)}
-                        role="button"
-                        aria-pressed={selectedPokemonId == pokemon.id}
-                        tabIndex={0}
-                        onKeyDown={(e) => {
-                            if (e.key == "Enter" || e.key == " ") {
-                                handleItemClick(pokemon.id);
+                {filterAndSortPokemon(data, filters, sortingOrder).map(
+                    (pokemon) => (
+                        <li
+                            key={pokemon.id}
+                            className={
+                                selectedPokemonId == pokemon.id
+                                    ? "selected"
+                                    : ""
                             }
-                        }}
-                    >
-                        <img
-                            src={pokemon.sprites.front_default}
-                            alt={`${capitalizeFirstLetter(pokemon.name)} image`}
-                        />
-                        {capitalizeFirstLetter(pokemon.name)}
-                    </li>
-                ))}
+                            onClick={() => handleItemClick(pokemon.id)}
+                            role="button"
+                            aria-pressed={selectedPokemonId == pokemon.id}
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                                if (e.key == "Enter" || e.key == " ") {
+                                    handleItemClick(pokemon.id);
+                                }
+                            }}
+                        >
+                            <img
+                                src={pokemon.sprites.front_default}
+                                alt={`${capitalizeFirstLetter(pokemon.name)} image`}
+                            />
+                            {capitalizeFirstLetter(pokemon.name)}
+                        </li>
+                    )
+                )}
             </ul>
         </>
     );

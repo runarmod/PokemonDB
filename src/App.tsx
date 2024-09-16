@@ -7,7 +7,6 @@ import SortAndFilter from "./components/SortAndFilter";
 import ContextProvider from "./components/ContextProvider";
 
 function App() {
-
     return (
         <QueryClientProvider client={queryClient}>
             <ContextProvider>

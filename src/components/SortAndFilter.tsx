@@ -1,15 +1,20 @@
-import pokemonTypeColors from "../pokemonTypeColors";
+import pokemonTypeColors from "../utils";
 import PokemonTypeLabel from "./PokemonTypeLabel";
 import "../styles/SortAndFilter.css";
 import StarIcon from "@mui/icons-material/Star";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { Context } from "./ContextProvider";
 
 export default function SortAndFilter() {
-    const { sortingOrder, changeSortingOrder } = useContext(Context);
+    const { sortingOrder, changeSortingOrder, updateFilters, filters } =
+        useContext(Context);
 
     function handleRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
         changeSortingOrder(event.target.value);
+    }
+
+    function handleCheckChange(event: React.ChangeEvent<HTMLInputElement>) {
+        updateFilters(event.target.value);
     }
     return (
         <div className="sortAndFilter">
@@ -53,14 +58,26 @@ export default function SortAndFilter() {
             <ul className="filterList">
                 <li className="filterListEntry">
                     <label htmlFor="checkFavorite"></label>
-                    <input type="checkbox" id="checkFavorite" />
+                    <input
+                        type="checkbox"
+                        id="checkFavorite"
+                        value={"favorite"}
+                        onChange={handleCheckChange}
+                        checked={filters.includes("favorite")}
+                    />
                     <StarIcon sx={{ fontSize: 30 }} className="starIcon" />
                 </li>
 
-                {Array.from(pokemonTypeColors.keys()).map((type) => (
+                {Array.from(pokemonTypeColors.keys()).map((type: string) => (
                     <li key={type} className="filterListEntry">
                         <label htmlFor={"check" + type}></label>
-                        <input type="checkbox" id={"check" + type}></input>
+                        <input
+                            type="checkbox"
+                            id={"check" + type}
+                            value={type}
+                            onChange={handleCheckChange}
+                            checked={filters.includes(type)}
+                        />
                         <PokemonTypeLabel type={type} />
                     </li>
                 ))}
