@@ -3,8 +3,8 @@ import { Requests } from "../api/Requests";
 import { PokeAPI } from "pokeapi-types";
 import { useQuery } from "@tanstack/react-query";
 import { capitalizeFirstLetter } from "../utils";
-import Star from "../assets/star.png"
-import FilledStar from "../assets/star_filled.png"
+import Star from "../assets/star.png";
+import FilledStar from "../assets/star_filled.png";
 import { useEffect, useState } from "react";
 
 const PokemonCard = ({ id }: { id: number }) => {
@@ -51,7 +51,11 @@ const PokemonCard = ({ id }: { id: number }) => {
         <article id="PokemonCardContainer">
             <figure id="ImageContainer">
                 <button id="favoritesButton" onClick={handleFavorite}>
-                    <img id="StarIcon" src={favorites.includes(id) ? FilledStar : Star} alt="Star image"/>
+                    <img
+                        id="StarIcon"
+                        src={favorites.includes(id) ? FilledStar : Star}
+                        alt="Star image"
+                    />
                 </button>
                 <img
                     id="PokemonImage"
