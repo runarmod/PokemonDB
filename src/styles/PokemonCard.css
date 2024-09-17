@@ -30,8 +30,9 @@
     top: 5px;
     left: 5px;
     background: none;
-    border: none;
+    margin: 0px;
     padding: 0px;
+    border: none;
 }
 #favoritesButton:hover {
     transform: scale(1.1);
@@ -41,7 +42,11 @@
     outline: none;
 }
 
-#PokemonCardContainer img {
+#StarIcon {
+    height: 5vh;
+}
+
+#PokemonImage {
     height: 75%;
     padding: 10px;
 }
@@ -126,7 +131,7 @@
         border-radius: 10px 10px 0px 0px;
     }
 
-    #PokemonCardContainer img {
+    #PokemonImage {
         height: 80%;
     }
 
