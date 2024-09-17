@@ -3,6 +3,7 @@ import { PokeAPI } from "pokeapi-types";
 import { useEffect, useState } from "react";
 import { Requests } from "../api/Requests";
 import "../styles/PokemonList.css";
+import RefreshIcon from "../assets/refresh.png";
 import {
     capitalizeFirstLetter,
     filterAndSortPokemon,
@@ -128,7 +129,7 @@ const PokemonList = ({ limit }: { limit: number }) => {
                         }}
                     >
                         <img
-                            src="src/assets/refresh.png"
+                            src={RefreshIcon}
                             alt="Refresh icon"
                             className={
                                 isFetchingNextPage

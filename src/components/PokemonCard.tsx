@@ -2,13 +2,44 @@ import "../styles/PokemonCard.css";
 import { Requests } from "../api/Requests";
 import { PokeAPI } from "pokeapi-types";
 import { useQuery } from "@tanstack/react-query";
+import Star from "../assets/star.png";
+import FilledStar from "../assets/star_filled.png";
 import { capitalizeFirstLetter, useAppContext } from "../utils";
+import { useEffect, useState } from "react";
 
 const PokemonCard = () => {
     const { selectedPokemonId } = useAppContext();
 
+    const [favorites, setFavorites] = useState<number[]>([]);
+
+    useEffect(() => {
+        const favoriteList = JSON.parse(
+            localStorage.getItem("favorites") || "[]"
+        );
+        setFavorites(favoriteList);
+    }, []);
+
+    function handleFavorite(): void {
+        let updatedFavorites: number[] = [];
+        if (favorites.includes(selectedPokemonId)) {
+            updatedFavorites = favorites.filter(
+                (favorite: number) => favorite !== selectedPokemonId
+            );
+        } else {
+            updatedFavorites = [...favorites, selectedPokemonId];
+        }
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+        setFavorites(updatedFavorites);
+    }
+
     function formatId(id: number): string {
         return `#${id.toString().padStart(4, "0")}`;
+    }
+
+    function removeDuplicateAbility(
+        abilities: PokeAPI.PokemonAbility[]
+    ): string[] {
+        return [...new Set(abilities.map((a) => a.ability.name))];
     }
 
     function fetchData(): Promise<PokeAPI.Pokemon> {
@@ -27,7 +58,19 @@ const PokemonCard = () => {
     return (
         <article id="PokemonCardContainer">
             <figure id="ImageContainer">
+                <button id="favoritesButton" onClick={handleFavorite}>
+                    <img
+                        id="StarIcon"
+                        src={
+                            favorites.includes(selectedPokemonId)
+                                ? FilledStar
+                                : Star
+                        }
+                        alt="Star image"
+                    />
+                </button>
                 <img
+                    id="PokemonImage"
                     src={data.sprites.front_default}
                     alt={`${capitalizeFirstLetter(data.name)} image`}
                 />
@@ -63,13 +106,13 @@ const PokemonCard = () => {
                     <section>
                         <h3>Abilities</h3>
                         <ul>
-                            {data.abilities.map((pokemonAbility) => (
-                                <li key={pokemonAbility.ability.name}>
-                                    {capitalizeFirstLetter(
-                                        pokemonAbility.ability.name
-                                    )}
-                                </li>
-                            ))}
+                            {removeDuplicateAbility(data.abilities).map(
+                                (name) => (
+                                    <li key={name}>
+                                        {capitalizeFirstLetter(name)}
+                                    </li>
+                                )
+                            )}
                         </ul>
                     </section>
                 </div>

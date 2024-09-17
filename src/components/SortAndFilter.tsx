@@ -1,5 +1,6 @@
 import pokemonTypeColors, { useAppContext } from "../utils";
 import PokemonTypeLabel from "./PokemonTypeLabel";
+import Star from "../assets/star_filled.png";
 import "../styles/SortAndFilter.css";
 
 export default function SortAndFilter() {
@@ -62,11 +63,7 @@ export default function SortAndFilter() {
                         onChange={handleCheckChange}
                         checked={filters.includes("favorite")}
                     />
-                    <img
-                        src="src/assets/star_filled.png"
-                        alt="favorite icon"
-                        id="favoriteIcon"
-                    />
+                    <img src={Star} alt="favorite icon" id="favoriteIcon" />
                 </li>
 
                 {Array.from(pokemonTypeColors.keys()).map((type: string) => (
