@@ -9,6 +9,12 @@ const PokemonCard = ({ id }: { id: number }) => {
         return `#${id.toString().padStart(4, "0")}`;
     }
 
+    function removeDuplicateAbility(
+        abilities: PokeAPI.PokemonAbility[]
+    ): string[] {
+        return [...new Set(abilities.map((a) => a.ability.name))];
+    }
+
     function fetchData(): Promise<PokeAPI.Pokemon> {
         return Requests.getPokemonById(id);
     }
@@ -59,13 +65,13 @@ const PokemonCard = ({ id }: { id: number }) => {
                     <section>
                         <h3>Abilities</h3>
                         <ul>
-                            {data.abilities.map((pokemonAbility) => (
-                                <li key={pokemonAbility.ability.name}>
-                                    {capitalizeFirstLetter(
-                                        pokemonAbility.ability.name
-                                    )}
-                                </li>
-                            ))}
+                            {removeDuplicateAbility(data.abilities).map(
+                                (name) => (
+                                    <li key={name}>
+                                        {capitalizeFirstLetter(name)}
+                                    </li>
+                                )
+                            )}
                         </ul>
                     </section>
                 </div>
