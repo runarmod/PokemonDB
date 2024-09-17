@@ -1,0 +1,50 @@
+[
+    {
+      "id": 1,
+      "name": "bulbasaur",
+      "height": 70,
+      "weight": 6.9,
+      "sprites": {
+        "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+      },
+      "types": [
+        {
+          "type": { "name": "grass" }
+        },
+        {
+          "type": { "name": "poison" }
+        }
+      ],
+      "abilities": [
+        {
+          "ability": { "name": "overgrow" }
+        },
+        {
+          "ability": { "name": "chlorofyll"}
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "ivysaur",
+      "height": 100,
+      "weight": 13,
+      "sprites": {
+        "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+      },
+      "types": [
+        {
+          "type": { "name": "grass" }
+        },
+        {
+          "type": { "name": "poison" }
+        }
+      ],
+      "abilities": [
+        {
+          "ability": { "name": "overgrow" }
+        }
+      ]
+    }
+]
+  
