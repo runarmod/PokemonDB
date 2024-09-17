@@ -11,12 +11,8 @@ const PokemonCard = ({ id }: { id: number }) => {
 
     function removeDuplicateAbility(
         abilities: PokeAPI.PokemonAbility[]
-    ): PokeAPI.PokemonAbility[] {
-        return abilities.filter(
-            (ability, index, self) =>
-                self.map((a) => a.ability.name).indexOf(ability.ability.name) ==
-                index
-        );
+    ): string[] {
+        return [...new Set(abilities.map((a) => a.ability.name))];
     }
 
     function fetchData(): Promise<PokeAPI.Pokemon> {
@@ -70,11 +66,9 @@ const PokemonCard = ({ id }: { id: number }) => {
                         <h3>Abilities</h3>
                         <ul>
                             {removeDuplicateAbility(data.abilities).map(
-                                (pokemonAbility) => (
-                                    <li key={pokemonAbility.ability.name}>
-                                        {capitalizeFirstLetter(
-                                            pokemonAbility.ability.name
-                                        )}
+                                (name) => (
+                                    <li key={name}>
+                                        {capitalizeFirstLetter(name)}
                                     </li>
                                 )
                             )}
