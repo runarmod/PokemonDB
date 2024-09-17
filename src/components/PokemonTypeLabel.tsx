@@ -1,4 +1,4 @@
-import pokemonTypeColors from "../utils";
+import { pokemonTypeColors } from "../utils";
 import "../styles/PokemonTypeLabel.css";
 
 export default function PokemonTypeLabel({ type }: { type: string }) {

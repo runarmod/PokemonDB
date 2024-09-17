@@ -5,19 +5,9 @@ import { useQuery } from "@tanstack/react-query";
 import Star from "../assets/star.png";
 import FilledStar from "../assets/star_filled.png";
 import { capitalizeFirstLetter, useAppContext } from "../utils";
-import { useEffect, useState } from "react";
 
 const PokemonCard = () => {
-    const { selectedPokemonId } = useAppContext();
-
-    const [favorites, setFavorites] = useState<number[]>([]);
-
-    useEffect(() => {
-        const favoriteList = JSON.parse(
-            localStorage.getItem("favorites") || "[]"
-        );
-        setFavorites(favoriteList);
-    }, []);
+    const { selectedPokemonId, favorites, updateFavorites } = useAppContext();
 
     function handleFavorite(): void {
         let updatedFavorites: number[] = [];
@@ -28,8 +18,7 @@ const PokemonCard = () => {
         } else {
             updatedFavorites = [...favorites, selectedPokemonId];
         }
-        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
-        setFavorites(updatedFavorites);
+        updateFavorites(updatedFavorites);
     }
 
     function formatId(id: number): string {

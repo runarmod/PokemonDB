@@ -1,5 +1,6 @@
 #wrapper {
-    width: 100vw;
+    width: calc(100vw - 20px);
+    padding: 0 10px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

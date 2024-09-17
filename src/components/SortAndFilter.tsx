@@ -1,4 +1,4 @@
-import pokemonTypeColors, { useAppContext } from "../utils";
+import { pokemonTypeColors, sortingType, useAppContext } from "../utils";
 import PokemonTypeLabel from "./PokemonTypeLabel";
 import Star from "../assets/star_filled.png";
 import "../styles/SortAndFilter.css";
@@ -8,7 +8,7 @@ export default function SortAndFilter() {
         useAppContext();
 
     function handleRadioChange(event: React.ChangeEvent<HTMLInputElement>) {
-        changeSortingOrder(event.target.value);
+        changeSortingOrder(Number(event.target.value));
     }
 
     function handleCheckChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -23,9 +23,9 @@ export default function SortAndFilter() {
                         type="radio"
                         name="sorting"
                         id="rbtId"
-                        value="id"
+                        value={sortingType.ID}
                         onChange={handleRadioChange}
-                        checked={sortingOrder == "id"}
+                        checked={sortingOrder == sortingType.ID}
                     />
                     <label htmlFor="rbtId">#ID</label>
                 </li>
@@ -34,9 +34,9 @@ export default function SortAndFilter() {
                         type="radio"
                         name="sorting"
                         id="rbtName"
-                        value="name_asc"
+                        value={sortingType.NAME_ASC}
                         onChange={handleRadioChange}
-                        checked={sortingOrder == "name_asc"}
+                        checked={sortingOrder == sortingType.NAME_ASC}
                     />
                     <label htmlFor="rbtName">Name A-Z</label>
                 </li>
@@ -45,9 +45,9 @@ export default function SortAndFilter() {
                         type="radio"
                         name="sorting"
                         id="rbtNameReversed"
-                        value="name_desc"
+                        value={sortingType.NAME_DESC}
                         onChange={handleRadioChange}
-                        checked={sortingOrder == "name_desc"}
+                        checked={sortingOrder == sortingType.NAME_DESC}
                     />
                     <label htmlFor="rbtNameReversed">Name Z-A</label>
                 </li>
@@ -55,7 +55,6 @@ export default function SortAndFilter() {
             <h2>Filters</h2>
             <ul className="filterList">
                 <li className="filterListEntry">
-                    <label htmlFor="checkFavorite"></label>
                     <input
                         type="checkbox"
                         id="checkFavorite"
@@ -63,12 +62,13 @@ export default function SortAndFilter() {
                         onChange={handleCheckChange}
                         checked={filters.includes("favorite")}
                     />
-                    <img src={Star} alt="favorite icon" id="favoriteIcon" />
+                    <label htmlFor="checkFavorite">
+                        <img src={Star} alt="favorite icon" id="favoriteIcon" />
+                    </label>
                 </li>
 
                 {Array.from(pokemonTypeColors.keys()).map((type: string) => (
                     <li key={type} className="filterListEntry">
-                        <label htmlFor={"check" + type}></label>
                         <input
                             type="checkbox"
                             id={"check" + type}
@@ -76,7 +76,9 @@ export default function SortAndFilter() {
                             onChange={handleCheckChange}
                             checked={filters.includes(type)}
                         />
-                        <PokemonTypeLabel type={type} />
+                        <label htmlFor={"check" + type}>
+                            <PokemonTypeLabel type={type} />
+                        </label>
                     </li>
                 ))}
             </ul>

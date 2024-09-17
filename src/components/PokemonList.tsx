@@ -16,6 +16,7 @@ const PokemonList = ({ limit }: { limit: number }) => {
         changeSelectedPokemonId,
         sortingOrder,
         filters,
+        favorites,
     } = useAppContext();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [offset, setOffset] = useState(0);
@@ -64,12 +65,18 @@ const PokemonList = ({ limit }: { limit: number }) => {
             const sortedAndFilteredPokemon = filterAndSortPokemon(
                 data.pages.flat(),
                 filters,
-                sortingOrder
+                sortingOrder,
+                favorites
             );
             if (sortedAndFilteredPokemon.length) {
                 changeSelectedPokemonId(sortedAndFilteredPokemon[0].id);
             }
         }
+
+        // We want this useEffect() to be called every time the 'sortingOrder' or 'filters' change.
+        // We do not want it to be called every time 'data' os changed.
+        // Because of this we disable the eslint warning on this line.
+
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sortingOrder, filters]);
 
@@ -93,7 +100,8 @@ const PokemonList = ({ limit }: { limit: number }) => {
                 {filterAndSortPokemon(
                     data.pages.flat(),
                     filters,
-                    sortingOrder
+                    sortingOrder,
+                    favorites
                 ).map((pokemon) => (
                     <li
                         key={pokemon.id}

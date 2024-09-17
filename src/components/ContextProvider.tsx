@@ -1,12 +1,15 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
+import { sortingType } from "../utils";
 
 interface AppContextType {
     selectedPokemonId: number;
     changeSelectedPokemonId: (id: number) => void;
-    sortingOrder: string;
-    changeSortingOrder: (order: string) => void;
+    sortingOrder: sortingType;
+    changeSortingOrder: (order: sortingType) => void;
     filters: string[];
     updateFilters: (filter: string) => void;
+    favorites: number[];
+    updateFavorites: (favorites: number[]) => void;
 }
 
 export const AppContext = createContext<AppContextType | null>(null);
@@ -17,15 +20,21 @@ interface ContextProviderProps {
 
 const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     const [selectedPokemonId, setSelectedPokemonId] = useState<number>(1);
-    const [sortingOrder, setSorting] = useState<string>("id");
+    const [sortingOrder, setSorting] = useState<sortingType>(sortingType.ID);
     const [filters, setFilters] = useState<string[]>([]);
+    const [favorites, setFavorites] = useState<number[]>([]);
 
     const changeSelectedPokemonId = (id: number) => {
         localStorage.setItem("selectedPokemonId", JSON.stringify(id));
         setSelectedPokemonId(id);
     };
 
-    const changeSortingOrder = (order: string) => {
+    const updateFavorites = (favorites: number[]) => {
+        localStorage.setItem("favorites", JSON.stringify(favorites));
+        setFavorites(favorites);
+    };
+
+    const changeSortingOrder = (order: sortingType) => {
         localStorage.setItem("sortingOrder", JSON.stringify(order));
         setSorting(order);
     };
@@ -55,6 +64,10 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
         if (storedSelectedPokemonId) {
             setSelectedPokemonId(JSON.parse(storedSelectedPokemonId));
         }
+        const storedFavorites = localStorage.getItem("favorites");
+        if (storedFavorites) {
+            setFavorites(JSON.parse(storedFavorites));
+        }
     }, []);
 
     return (
@@ -66,6 +79,8 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
                 changeSortingOrder,
                 filters,
                 updateFilters,
+                favorites,
+                updateFavorites,
             }}
         >
             {children}
