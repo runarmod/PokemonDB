@@ -3,8 +3,33 @@ import { Requests } from "../api/Requests";
 import { PokeAPI } from "pokeapi-types";
 import { useQuery } from "@tanstack/react-query";
 import { capitalizeFirstLetter } from "../utils";
+import Star from "../assets/star.png";
+import FilledStar from "../assets/star_filled.png";
+import { useEffect, useState } from "react";
 
 const PokemonCard = ({ id }: { id: number }) => {
+    const [favorites, setFavorites] = useState<number[]>([]);
+
+    useEffect(() => {
+        const favoriteList = JSON.parse(
+            localStorage.getItem("favorites") || "[]"
+        );
+        setFavorites(favoriteList);
+    }, []);
+
+    function handleFavorite(): void {
+        let updatedFavorites: number[] = [];
+        if (favorites.includes(id)) {
+            updatedFavorites = favorites.filter(
+                (favorite: number) => favorite !== id
+            );
+        } else {
+            updatedFavorites = [...favorites, id];
+        }
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+        setFavorites(updatedFavorites);
+    }
+
     function formatId(id: number): string {
         return `#${id.toString().padStart(4, "0")}`;
     }
@@ -31,7 +56,15 @@ const PokemonCard = ({ id }: { id: number }) => {
     return (
         <article id="PokemonCardContainer">
             <figure id="ImageContainer">
+                <button id="favoritesButton" onClick={handleFavorite}>
+                    <img
+                        id="StarIcon"
+                        src={favorites.includes(id) ? FilledStar : Star}
+                        alt="Star image"
+                    />
+                </button>
                 <img
+                    id="PokemonImage"
                     src={data.sprites.front_default}
                     alt={`${capitalizeFirstLetter(data.name)} image`}
                 />

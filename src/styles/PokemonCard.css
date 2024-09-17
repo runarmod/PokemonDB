@@ -15,6 +15,7 @@
 }
 
 #ImageContainer {
+    position: relative;
     height: 100%;
     width: 50%;
     border-radius: 10px 0px 0px 10px;
@@ -24,7 +25,28 @@
     margin: 0px;
 }
 
-#PokemonCardContainer img {
+#favoritesButton {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: none;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+#favoritesButton:hover {
+    transform: scale(1.1);
+}
+#favoritesButton:focus,
+#favoritesButton:focus-visible {
+    outline: none;
+}
+
+#StarIcon {
+    height: 5vh;
+}
+
+#PokemonImage {
     height: 75%;
     padding: 10px;
 }
@@ -109,7 +131,7 @@
         border-radius: 10px 10px 0px 0px;
     }
 
-    #PokemonCardContainer img {
+    #PokemonImage {
         height: 80%;
     }
 
