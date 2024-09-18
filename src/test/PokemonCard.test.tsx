@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, Mock } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import PokemonCard from "../components/PokemonCard";
 import { useAppContext } from "../utils";
 import { useQuery } from "@tanstack/react-query";
@@ -22,7 +23,7 @@ vi.mock(import("@tanstack/react-query"), async (importOriginal) => {
     };
 });
 
-describe("PokemonCard", () => {
+describe("PokemonCard - General tests", () => {
     beforeEach(() => {
         (useAppContext as Mock).mockReturnValue({
             selectedPokemonId: 1,
@@ -91,6 +92,7 @@ describe("PokemonCard", () => {
         expect(await screen.findByText("Overgrow")).toBeInTheDocument();
         expect(await screen.findByText("Chlorophyll")).toBeInTheDocument();
 
+        // Check Pokemon Image
         const pokemonImage = screen.getByAltText("Bulbasaur image");
         expect(pokemonImage).toBeInTheDocument();
         expect(pokemonImage).toHaveAttribute(
@@ -118,7 +120,126 @@ describe("PokemonCard", () => {
         render(<PokemonCard />);
 
         const abilityElements = await screen.findAllByText("Overgrow");
-
         expect(abilityElements).toHaveLength(1);
     });
 });
+
+describe("PokemonCard - Favorites test", () => {
+    const mockUpdateFavorites = vi.fn();
+
+    beforeEach(() => {
+        mockUpdateFavorites.mockClear();
+    });
+
+    it("should display empty star when a Pokemon is not favorited", () => {
+        (useAppContext as Mock).mockReturnValue({
+        selectedPokemonId: 1,
+        favorites: [],
+        updateFavorites: mockUpdateFavorites,
+        });
+        render(<PokemonCard />);
+
+        const starIcon = screen.getByAltText("Star image");
+        expect(starIcon).toHaveAttribute("src", "/project1/src/assets/star.png");
+    });
+
+    it("should display empty star when other Pokemons are favorited", () => {
+        (useAppContext as Mock).mockReturnValue({
+        selectedPokemonId: 1,
+        favorites: [2],
+        updateFavorites: mockUpdateFavorites,
+        });
+        render(<PokemonCard />);
+
+        const starIcon = screen.getByAltText("Star image");
+        expect(starIcon).toHaveAttribute("src", "/project1/src/assets/star.png");
+    });
+
+    it("should display filled star when a Pokemon is favorited", () => {
+        (useAppContext as Mock).mockReturnValue({
+        selectedPokemonId: 1,
+        favorites: [1],
+        updateFavorites: mockUpdateFavorites,
+        });
+        render(<PokemonCard />);
+
+        const filledStarIcon = screen.getByAltText("Star image");
+        expect(filledStarIcon).toHaveAttribute("src", "/project1/src/assets/star_filled.png");
+    });
+
+    it("should display filled star when a Pokemon, amongst others, is favorited ", () => {
+        (useAppContext as Mock).mockReturnValue({
+        selectedPokemonId: 1,
+        favorites: [1,2],
+        updateFavorites: mockUpdateFavorites,
+        });
+        render(<PokemonCard />);
+
+        const filledStarIcon = screen.getByAltText("Star image");
+        expect(filledStarIcon).toHaveAttribute("src", "/project1/src/assets/star_filled.png");
+    });
+
+    it("should add as favorite when clicking on empty favorite button", async () => {
+        (useAppContext as Mock).mockReturnValue({
+        selectedPokemonId: 1,
+        favorites: [], 
+        updateFavorites: mockUpdateFavorites,
+        });
+        render(<PokemonCard />);
+
+        const favoriteButton = screen.getByRole("button", { name: "Star image" });
+        userEvent.click(favoriteButton);
+
+        await waitFor(() => {
+            expect(mockUpdateFavorites).toHaveBeenCalledWith([1]);
+        });
+    });
+
+    it("should be add to list of other favorites when clicking on empty favorite button", async () => {
+        (useAppContext as Mock).mockReturnValue({
+        selectedPokemonId: 1,
+        favorites: [2], 
+        updateFavorites: mockUpdateFavorites,
+        });
+        render(<PokemonCard />);
+
+        const favoriteButton = screen.getByRole("button", { name: "Star image" });
+        userEvent.click(favoriteButton);
+
+        await waitFor(() => {
+            expect(mockUpdateFavorites).toHaveBeenCalledWith([2,1]);
+        });
+    });
+
+    it("should be removed as favorite when clicking on filled favorite button", async () => {
+        (useAppContext as Mock).mockReturnValue({
+        selectedPokemonId: 1,
+        favorites: [1], 
+        updateFavorites: mockUpdateFavorites,
+        });
+        render(<PokemonCard />);
+
+        const favoriteButton = screen.getByRole("button", { name: "Star image" });
+        userEvent.click(favoriteButton);
+
+        await waitFor(() => {
+            expect(mockUpdateFavorites).toHaveBeenCalledWith([]);
+        });
+    });
+
+    it("should remove only one Pokemon from favorite when clicking on filled favorite button", async () => {
+        (useAppContext as Mock).mockReturnValue({
+        selectedPokemonId: 1,
+        favorites: [1,2], 
+        updateFavorites: mockUpdateFavorites,
+        });
+        render(<PokemonCard />);
+
+        const favoriteButton = screen.getByRole("button", { name: "Star image" });
+        userEvent.click(favoriteButton);
+
+        await waitFor(() => {
+            expect(mockUpdateFavorites).toHaveBeenCalledWith([2]);
+        });
+    });
+})
