@@ -9,7 +9,7 @@ export default function PokemonTypeLabel({ type }: { type: string }) {
                 backgroundColor: pokemonTypeColors.get(type),
             }}
         >
-            <p>{type}</p>
+            {type}
         </label>
     );
 }

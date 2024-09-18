@@ -18,19 +18,19 @@ function sortById(p1: PokeAPI.Pokemon, p2: PokeAPI.Pokemon): number {
     return p1.id - p2.id;
 }
 
-export enum sortingType {
+export enum SortingType {
     NAME_ASC,
     NAME_DESC,
     ID,
 }
 
 export const sortingMap: Map<
-    sortingType,
+    SortingType,
     (p1: PokeAPI.Pokemon, p2: PokeAPI.Pokemon) => number
-> = new Map<sortingType, (p1: PokeAPI.Pokemon, p2: PokeAPI.Pokemon) => number>([
-    [sortingType.NAME_ASC, sortByNameAsc],
-    [sortingType.NAME_DESC, sortByNameDesc],
-    [sortingType.ID, sortById],
+> = new Map<SortingType, (p1: PokeAPI.Pokemon, p2: PokeAPI.Pokemon) => number>([
+    [SortingType.NAME_ASC, sortByNameAsc],
+    [SortingType.NAME_DESC, sortByNameDesc],
+    [SortingType.ID, sortById],
 ]);
 
 export const pokemonTypeColors: Map<string, string> = new Map<string, string>([
@@ -56,7 +56,7 @@ export const pokemonTypeColors: Map<string, string> = new Map<string, string>([
 export function filterAndSortPokemon(
     pokemon: PokeAPI.Pokemon[],
     filters: string[],
-    sortingOrder: sortingType,
+    sortingOrder: SortingType,
     favorites: number[]
 ): PokeAPI.Pokemon[] {
     return pokemon

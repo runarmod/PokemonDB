@@ -1,4 +1,4 @@
-import { pokemonTypeColors, sortingType, useAppContext } from "../utils";
+import { pokemonTypeColors, SortingType, useAppContext } from "../utils";
 import PokemonTypeLabel from "./PokemonTypeLabel";
 import Star from "../assets/star_filled.png";
 import "../styles/SortAndFilter.css";
@@ -23,9 +23,9 @@ export default function SortAndFilter() {
                         type="radio"
                         name="sorting"
                         id="rbtId"
-                        value={sortingType.ID}
+                        value={SortingType.ID}
                         onChange={handleRadioChange}
-                        checked={sortingOrder == sortingType.ID}
+                        checked={sortingOrder == SortingType.ID}
                     />
                     <label htmlFor="rbtId">#ID</label>
                 </li>
@@ -34,9 +34,9 @@ export default function SortAndFilter() {
                         type="radio"
                         name="sorting"
                         id="rbtName"
-                        value={sortingType.NAME_ASC}
+                        value={SortingType.NAME_ASC}
                         onChange={handleRadioChange}
-                        checked={sortingOrder == sortingType.NAME_ASC}
+                        checked={sortingOrder == SortingType.NAME_ASC}
                     />
                     <label htmlFor="rbtName">Name A-Z</label>
                 </li>
@@ -45,9 +45,9 @@ export default function SortAndFilter() {
                         type="radio"
                         name="sorting"
                         id="rbtNameReversed"
-                        value={sortingType.NAME_DESC}
+                        value={SortingType.NAME_DESC}
                         onChange={handleRadioChange}
-                        checked={sortingOrder == sortingType.NAME_DESC}
+                        checked={sortingOrder == SortingType.NAME_DESC}
                     />
                     <label htmlFor="rbtNameReversed">Name Z-A</label>
                 </li>

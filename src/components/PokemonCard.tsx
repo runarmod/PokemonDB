@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import Star from "../assets/star.png";
 import FilledStar from "../assets/star_filled.png";
 import { capitalizeFirstLetter, useAppContext } from "../utils";
+import PokemonTypeLabel from "./PokemonTypeLabel";
 
 const PokemonCard = () => {
     const { selectedPokemonId, favorites, updateFavorites } = useAppContext();
@@ -31,7 +32,10 @@ const PokemonCard = () => {
         return [...new Set(abilities.map((a) => a.ability.name))];
     }
 
-    function fetchData(): Promise<PokeAPI.Pokemon> {
+    function fetchData(): Promise<PokeAPI.Pokemon> | null {
+        if (!selectedPokemonId) {
+            return null;
+        }
         return Requests.getPokemonById(selectedPokemonId);
     }
 
@@ -41,8 +45,15 @@ const PokemonCard = () => {
     });
 
     if (isLoading) return <div>Loading...</div>;
-    if (error || data == undefined)
-        return <div>Error fetching Pokémon data</div>;
+    if (error) return <div>Error fetching Pokémon data</div>;
+    if (data == undefined) {
+        return (
+            <div>
+                No Pokemon macthes the filters. Please Load more Pokemon or
+                change the filters.
+            </div>
+        );
+    }
 
     return (
         <article id="PokemonCardContainer">
@@ -84,10 +95,13 @@ const PokemonCard = () => {
                         <h3>Types</h3>
                         <ul>
                             {data.types.map((pokemonType) => (
-                                <li key={pokemonType.type.name}>
-                                    {capitalizeFirstLetter(
-                                        pokemonType.type.name
-                                    )}
+                                <li
+                                    key={pokemonType.type.name}
+                                    className="typeListEntry"
+                                >
+                                    <PokemonTypeLabel
+                                        type={pokemonType.type.name}
+                                    />
                                 </li>
                             ))}
                         </ul>

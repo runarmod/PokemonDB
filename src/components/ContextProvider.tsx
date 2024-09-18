@@ -1,11 +1,11 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
-import { sortingType } from "../utils";
+import { SortingType } from "../utils";
 
 interface AppContextType {
     selectedPokemonId: number;
     changeSelectedPokemonId: (id: number) => void;
-    sortingOrder: sortingType;
-    changeSortingOrder: (order: sortingType) => void;
+    sortingOrder: SortingType;
+    changeSortingOrder: (order: SortingType) => void;
     filters: string[];
     updateFilters: (filter: string) => void;
     favorites: number[];
@@ -20,12 +20,12 @@ interface ContextProviderProps {
 
 const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     const [selectedPokemonId, setSelectedPokemonId] = useState<number>(1);
-    const [sortingOrder, setSorting] = useState<sortingType>(sortingType.ID);
+    const [sortingOrder, setSorting] = useState<SortingType>(SortingType.ID);
     const [filters, setFilters] = useState<string[]>([]);
     const [favorites, setFavorites] = useState<number[]>([]);
 
     const changeSelectedPokemonId = (id: number) => {
-        localStorage.setItem("selectedPokemonId", JSON.stringify(id));
+        sessionStorage.setItem("selectedPokemonId", JSON.stringify(id));
         setSelectedPokemonId(id);
     };
 
@@ -34,8 +34,8 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
         setFavorites(favorites);
     };
 
-    const changeSortingOrder = (order: sortingType) => {
-        localStorage.setItem("sortingOrder", JSON.stringify(order));
+    const changeSortingOrder = (order: SortingType) => {
+        sessionStorage.setItem("sortingOrder", JSON.stringify(order));
         setSorting(order);
     };
 
@@ -46,21 +46,21 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
         } else {
             newFilters.push(filter);
         }
-        localStorage.setItem("filters", JSON.stringify(newFilters));
+        sessionStorage.setItem("filters", JSON.stringify(newFilters));
         setFilters(newFilters);
     };
 
     useEffect(() => {
-        const storedFilters = localStorage.getItem("filters");
+        const storedFilters = sessionStorage.getItem("filters");
         if (storedFilters) {
             setFilters(JSON.parse(storedFilters));
         }
-        const storedSortingOrder = localStorage.getItem("sortingOrder");
+        const storedSortingOrder = sessionStorage.getItem("sortingOrder");
         if (storedSortingOrder) {
             setSorting(JSON.parse(storedSortingOrder));
         }
         const storedSelectedPokemonId =
-            localStorage.getItem("selectedPokemonId");
+            sessionStorage.getItem("selectedPokemonId");
         if (storedSelectedPokemonId) {
             setSelectedPokemonId(JSON.parse(storedSelectedPokemonId));
         }

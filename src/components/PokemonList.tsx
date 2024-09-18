@@ -70,6 +70,8 @@ const PokemonList = ({ limit }: { limit: number }) => {
             );
             if (sortedAndFilteredPokemon.length) {
                 changeSelectedPokemonId(sortedAndFilteredPokemon[0].id);
+            } else {
+                changeSelectedPokemonId(0);
             }
         }
 

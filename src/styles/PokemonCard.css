@@ -176,3 +176,7 @@
         aspect-ratio: 1/2;
     }
 }
+
+.typeListEntry {
+    margin: 2px;
+}
