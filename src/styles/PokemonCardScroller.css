@@ -6,7 +6,7 @@
 
 #ScrollerWrapper > button {
     background: none;
-    border: none; 
+    border: none;
     cursor: pointer;
     width: fit-content;
     margin: 10px;
@@ -20,7 +20,6 @@
 #ScrollerWrapper > button:last-of-type {
     animation: hoverDownUp 3s ease-in-out infinite;
 }
-
 
 #ScrollerWrapper > button:hover {
     transform: scale(1.1);
