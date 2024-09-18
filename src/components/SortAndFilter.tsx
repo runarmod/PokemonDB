@@ -24,9 +24,14 @@ export default function SortAndFilter() {
             <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className={`sortFilterMenu ${isMenuOpen ? "active" : ""}`}
-                aria-label="Toggle Menu"
+                aria-label={
+                    isMenuOpen ? "Close menu" : "Open sort/filter options"
+                }
             >
-                <img src={isMenuOpen ? X : SortFilter} alt="Sort/filter" />
+                <img
+                    src={`${isMenuOpen ? X : SortFilter}?${isMenuOpen}`}
+                    alt={isMenuOpen ? "Close" : "Sort/filter"}
+                />
             </button>
             <div className={`sortAndFilter ${isMenuOpen ? "active" : ""}`}>
                 <h2>Sort by</h2>
