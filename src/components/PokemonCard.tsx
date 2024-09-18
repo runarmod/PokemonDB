@@ -49,7 +49,7 @@ const PokemonCard = () => {
     if (data == undefined) {
         return (
             <div>
-                No Pokemon macthes the filters. Please Load more Pokemon or
+                No Pokémon matches the filters. Please load more Pokémon or
                 change the filters.
             </div>
         );

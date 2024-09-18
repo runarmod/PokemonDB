@@ -4,11 +4,11 @@
     flex-direction: column;
     border-radius: 10px;
     background-color: lightgray;
-    padding: 10px;
+    padding: 0 10px;
     color: white;
     background-color: #303030;
     box-shadow: 0 15px 30px #101010;
-    max-height: 95vw;
+    height: 95vh;
 }
 
 .filterList,
