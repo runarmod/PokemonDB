@@ -25,7 +25,6 @@
     animation: hoverDownUp 3s ease-in-out infinite;
 }
 
-
 @keyframes hoverUpDown {
     0% {
         transform: translateY(-3px);
