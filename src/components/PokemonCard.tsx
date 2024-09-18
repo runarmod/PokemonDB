@@ -48,10 +48,12 @@ const PokemonCard = () => {
     if (error) return <div>Error fetching Pokémon data</div>;
     if (data == undefined) {
         return (
-            <div>
-                No Pokémon matches the filters. Please load more Pokémon or
-                change the filters.
-            </div>
+            <article id="PokemonCardContainer">
+                <p>
+                    No Pokémon matches the filters. Please load more Pokémon or
+                    change the filters.
+                </p>
+            </article>
         );
     }
 
