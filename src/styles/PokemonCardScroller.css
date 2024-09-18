@@ -13,6 +13,10 @@
     font-size: 24px;
 }
 
+#ScrollerWrapper > button > img {
+    height: 5vh;
+}
+
 #ScrollerWrapper > button:first-of-type {
     animation: hoverUpDown 3s ease-in-out infinite;
 }
@@ -21,9 +25,6 @@
     animation: hoverDownUp 3s ease-in-out infinite;
 }
 
-#ScrollerWrapper > button:hover {
-    transform: scale(1.1);
-}
 
 @keyframes hoverUpDown {
     0% {
@@ -49,6 +50,12 @@
     }
 }
 
-#ScrollerWrapper > button > img {
-    height: 5vh;
+@media (prefers-reduced-motion) {
+    #ScrollerWrapper > button:first-of-type {
+        animation: none;
+    }
+
+    #ScrollerWrapper > button:last-of-type {
+        animation: none;
+    }
 }
