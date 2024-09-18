@@ -28,8 +28,8 @@ jobs:
             - name: 💁 Formatting
               run: npm run prettier
 
-            # - name: ✅ Testing
-            #   run: npm test
+            - name: ✅ Testing
+              run: npm test
 
             - name: 🏗️ Building
               run: npm run build
