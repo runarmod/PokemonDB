@@ -17,11 +17,16 @@
     height: 5vh;
 }
 
-#ScrollerWrapper > button:first-of-type {
+#ScrollerWrapper > button:hover > img {
+    scale: 1.1;
+    filter: drop-shadow(0 0 1px #fff3);
+}
+
+#ScrollerWrapper > button:first-of-type > img {
     animation: hoverUpDown 3s ease-in-out infinite;
 }
 
-#ScrollerWrapper > button:last-of-type {
+#ScrollerWrapper > button:last-of-type > img {
     animation: hoverDownUp 3s ease-in-out infinite;
 }
 
@@ -50,11 +55,11 @@
 }
 
 @media (prefers-reduced-motion) {
-    #ScrollerWrapper > button:first-of-type {
+    #ScrollerWrapper > button:first-of-type > img {
         animation: none;
     }
 
-    #ScrollerWrapper > button:last-of-type {
+    #ScrollerWrapper > button:last-of-type > img {
         animation: none;
     }
 }
