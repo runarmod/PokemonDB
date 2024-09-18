@@ -2,6 +2,7 @@ import { pokemonTypeColors, SortingType, useAppContext } from "../utils";
 import PokemonTypeLabel from "./PokemonTypeLabel";
 import Star from "../assets/star_filled.png";
 import SortFilter from "../assets/sort_filter.png";
+import X from "../assets/X.png";
 import "../styles/SortAndFilter.css";
 import { useState } from "react";
 
@@ -21,13 +22,11 @@ export default function SortAndFilter() {
     return (
         <div id="SortAndFilterWrapper">
             <button
-                onClick={() => {
-                    setIsMenuOpen(!isMenuOpen);
-                }}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
                 className={`sortFilterMenu ${isMenuOpen ? "active" : ""}`}
                 aria-label="Toggle Menu"
             >
-                <img src={SortFilter} alt="Sort/filter" />
+                <img src={isMenuOpen ? X : SortFilter} alt="Sort/filter" />
             </button>
             <div className={`sortAndFilter ${isMenuOpen ? "active" : ""}`}>
                 <h2>Sort by</h2>

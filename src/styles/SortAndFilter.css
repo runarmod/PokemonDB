@@ -66,7 +66,7 @@ h2 {
     float: right;
 }
 
-@media (max-width: 1150px) {
+@media (max-width: 1200px) {
     #SortAndFilterWrapper {
         position: absolute;
         right: 0;
