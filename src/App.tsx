@@ -5,6 +5,7 @@ import PokemonList from "./components/PokemonList";
 import PokemonCard from "./components/PokemonCard";
 import SortAndFilter from "./components/SortAndFilter";
 import ContextProvider from "./components/ContextProvider";
+import PokemonCardScroller from "./components/PokemonCardScroller";
 
 function App() {
     return (
@@ -12,7 +13,9 @@ function App() {
             <ContextProvider>
                 <div id="wrapper">
                     <PokemonList limit={20} />
-                    <PokemonCard />
+                    <PokemonCardScroller>
+                        <PokemonCard />
+                    </PokemonCardScroller>
                     <SortAndFilter />
                 </div>
             </ContextProvider>
