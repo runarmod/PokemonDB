@@ -24,7 +24,7 @@ const PokemonList = ({ limit }: { limit: number }) => {
 
     const handleItemClick = (index: number) => {
         changeSelectedPokemonId(index);
-        if (window.innerWidth <= 900) {
+        if (window.innerWidth <= 945) {
             toggleMenu();
         }
     };
@@ -87,7 +87,7 @@ const PokemonList = ({ limit }: { limit: number }) => {
         return <div>Error fetching Pokémon data</div>;
 
     return (
-        <>
+        <div id="PokemonListWrapper">
             <button
                 className={`hamburger ${isMenuOpen ? "active" : ""}`}
                 aria-label="Toggle Menu"
@@ -151,7 +151,7 @@ const PokemonList = ({ limit }: { limit: number }) => {
                     </li>
                 )}
             </ul>
-        </>
+        </div>
     );
 };
 
