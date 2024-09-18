@@ -1,0 +1,10 @@
+.pokemonTypeLabel {
+    font-weight: bold;
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: 100px;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 1px 1px #101010;
+}

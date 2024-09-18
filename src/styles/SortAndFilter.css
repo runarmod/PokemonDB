@@ -1,0 +1,40 @@
+.sortAndFilter {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: lightgray;
+    padding: 0 10px;
+    color: white;
+    background-color: #303030;
+    box-shadow: 0 15px 30px #101010;
+    height: 95vh;
+}
+
+.filterList,
+.sortList {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.filterListEntry,
+.sortListEntry {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    margin: 1px;
+}
+
+.starIcon {
+    color: yellow;
+}
+
+h2 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#favoriteIcon {
+    width: 20px;
+}

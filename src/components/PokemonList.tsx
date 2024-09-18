@@ -1,25 +1,29 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { PokeAPI } from "pokeapi-types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Requests } from "../api/Requests";
 import "../styles/PokemonList.css";
-import { capitalizeFirstLetter } from "../utils";
+import RefreshIcon from "../assets/refresh.png";
+import {
+    capitalizeFirstLetter,
+    filterAndSortPokemon,
+    useAppContext,
+} from "../utils";
 
-const PokemonList = ({
-    limit,
-    onPokemonSelect,
-}: {
-    limit: number;
-    onPokemonSelect: (id: number) => void;
-}) => {
-    const [selectedIndex, setSelectedIndex] = useState(1);
+const PokemonList = ({ limit }: { limit: number }) => {
+    const {
+        selectedPokemonId,
+        changeSelectedPokemonId,
+        sortingOrder,
+        filters,
+        favorites,
+    } = useAppContext();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [offset, setOffset] = useState(0);
     const lastInterestingPokemonId = 1025;
 
     const handleItemClick = (index: number) => {
-        setSelectedIndex(index);
-        onPokemonSelect(index);
+        changeSelectedPokemonId(index);
         if (window.innerWidth <= 900) {
             toggleMenu();
         }
@@ -56,6 +60,28 @@ const PokemonList = ({
         },
     });
 
+    useEffect(() => {
+        if (data !== undefined) {
+            const sortedAndFilteredPokemon = filterAndSortPokemon(
+                data.pages.flat(),
+                filters,
+                sortingOrder,
+                favorites
+            );
+            if (sortedAndFilteredPokemon.length) {
+                changeSelectedPokemonId(sortedAndFilteredPokemon[0].id);
+            } else {
+                changeSelectedPokemonId(0);
+            }
+        }
+
+        // We want this useEffect() to be called every time the 'sortingOrder' or 'filters' change.
+        // We do not want it to be called every time 'data' os changed.
+        // Because of this we disable the eslint warning on this line.
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [sortingOrder, filters]);
+
     if (isLoading) return <div>Loading...</div>;
     if (error || data == undefined)
         return <div>Error fetching Pokémon data</div>;
@@ -73,15 +99,20 @@ const PokemonList = ({
             </button>
 
             <ul className={`list ${isMenuOpen ? "active" : ""}`}>
-                {data?.pages.flat().map((pokemon) => (
+                {filterAndSortPokemon(
+                    data.pages.flat(),
+                    filters,
+                    sortingOrder,
+                    favorites
+                ).map((pokemon) => (
                     <li
                         key={pokemon.id}
                         className={
-                            selectedIndex == pokemon.id ? "selected" : ""
+                            selectedPokemonId == pokemon.id ? "selected" : ""
                         }
                         onClick={() => handleItemClick(pokemon.id)}
                         role="button"
-                        aria-pressed={selectedIndex == pokemon.id}
+                        aria-pressed={selectedPokemonId == pokemon.id}
                         tabIndex={0}
                         onKeyDown={(e) => {
                             if (e.key == "Enter" || e.key == " ") {
@@ -108,7 +139,7 @@ const PokemonList = ({
                         }}
                     >
                         <img
-                            src="src/assets/refresh.png"
+                            src={RefreshIcon}
                             alt="Refresh icon"
                             className={
                                 isFetchingNextPage
