@@ -207,7 +207,7 @@ describe("SortAndFilter - General tests", () => {
             expect(checkedCheckboxes).toHaveLength(3);
         });
 
-        it("should add filter when when clicking unchecked checkbox", async () => {
+        it("should add filter when clicking unchecked checkbox", async () => {
             const mockUpdateFilters = vi.fn();
             (useAppContext as Mock).mockReturnValue({
                 sortingOrder: SortingType.ID,
@@ -229,7 +229,7 @@ describe("SortAndFilter - General tests", () => {
             });
         });
 
-        it("should remove filter when when clicking checked checkbox", async () => {
+        it("should remove filter when clicking checked checkbox", async () => {
             const mockUpdateFilters = vi.fn();
             (useAppContext as Mock).mockReturnValue({
                 sortingOrder: SortingType.ID,
