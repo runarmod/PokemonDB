@@ -250,6 +250,25 @@ describe("SortAndFilter - General tests", () => {
         });
     });
 
+    describe("isMenuOpen test", () => {
+        it("should change state (and alt-text as a result) when clicking on menu button", async () => {
+            (useAppContext as Mock).mockReturnValue({
+                sortingOrder: SortingType.ID,
+                changeSortingOrder: vi.fn(),
+                updateFilters: vi.fn(),
+                filters: [],
+            });
+            render(<SortAndFilter />);
+            const menuButton = screen.getByAltText("Sort/filter");
+            expect(menuButton).toBeInTheDocument();
+            userEvent.click(menuButton);
+
+            await waitFor(() => {
+                expect(screen.getByAltText("Close")).toBeInTheDocument();
+            });
+        });
+    });
+
     describe("Snapshot test", () => {
         it("matches snapshot", () => {
             (useAppContext as Mock).mockReturnValue({
