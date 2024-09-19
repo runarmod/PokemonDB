@@ -17,6 +17,7 @@
     background-color: #303030;
     box-shadow: 0 15px 30px #101010;
     height: calc(100vh - 2 * 12px);
+    transition: height 0.3s ease-out;
 }
 
 .sortAndFilter > h2 {
