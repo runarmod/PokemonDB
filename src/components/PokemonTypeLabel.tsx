@@ -3,13 +3,13 @@ import "../styles/PokemonTypeLabel.css";
 
 export default function PokemonTypeLabel({ type }: { type: string }) {
     return (
-        <label
+        <span
             className="pokemonTypeLabel"
             style={{
                 backgroundColor: pokemonTypeColors.get(type),
             }}
         >
             {type}
-        </label>
+        </span>
     );
 }
