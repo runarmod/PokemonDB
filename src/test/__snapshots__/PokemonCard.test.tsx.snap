@@ -63,22 +63,22 @@ exports[`Snapshot test > matches snapshot 1`] = `
             <li
               class="typeListEntry"
             >
-              <label
+              <span
                 class="pokemonTypeLabel"
                 style="background-color: rgb(63, 161, 41);"
               >
                 grass
-              </label>
+              </span>
             </li>
             <li
               class="typeListEntry"
             >
-              <label
+              <span
                 class="pokemonTypeLabel"
                 style="background-color: rgb(145, 65, 203);"
               >
                 poison
-              </label>
+              </span>
             </li>
           </ul>
         </section>
