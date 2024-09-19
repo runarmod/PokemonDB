@@ -1,0 +1,65 @@
+#ScrollerWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ScrollerWrapper > button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: fit-content;
+    margin: 10px;
+    font-size: 24px;
+}
+
+#ScrollerWrapper > button > img {
+    height: 5vh;
+}
+
+#ScrollerWrapper > button:hover > img {
+    scale: 1.1;
+    filter: drop-shadow(0 0 1px #fff3);
+}
+
+#ScrollerWrapper > button:first-of-type > img {
+    animation: hoverUpDown 3s ease-in-out infinite;
+}
+
+#ScrollerWrapper > button:last-of-type > img {
+    animation: hoverDownUp 3s ease-in-out infinite;
+}
+
+@keyframes hoverUpDown {
+    0% {
+        transform: translateY(-3px);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+    100% {
+        transform: translateY(-3px);
+    }
+}
+
+@keyframes hoverDownUp {
+    0% {
+        transform: translateY(3px);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
+    100% {
+        transform: translateY(3px);
+    }
+}
+
+@media (prefers-reduced-motion) {
+    #ScrollerWrapper > button:first-of-type > img {
+        animation: none;
+    }
+
+    #ScrollerWrapper > button:last-of-type > img {
+        animation: none;
+    }
+}

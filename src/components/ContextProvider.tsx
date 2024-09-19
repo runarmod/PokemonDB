@@ -1,5 +1,6 @@
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 import { SortingType } from "../utils";
+import { PokeAPI } from "pokeapi-types";
 
 interface AppContextType {
     selectedPokemonId: number;
@@ -10,6 +11,10 @@ interface AppContextType {
     updateFilters: (filter: string) => void;
     favorites: number[];
     updateFavorites: (favorites: number[]) => void;
+    currentPokemonList: PokeAPI.Pokemon[];
+    setCurrentPokemonList: React.Dispatch<
+        React.SetStateAction<PokeAPI.Pokemon[]>
+    >;
 }
 
 export const AppContext = createContext<AppContextType | null>(null);
@@ -23,6 +28,9 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     const [sortingOrder, setSorting] = useState<SortingType>(SortingType.ID);
     const [filters, setFilters] = useState<string[]>([]);
     const [favorites, setFavorites] = useState<number[]>([]);
+    const [currentPokemonList, setCurrentPokemonList] = useState<
+        PokeAPI.Pokemon[]
+    >([]);
 
     const changeSelectedPokemonId = (id: number) => {
         sessionStorage.setItem("selectedPokemonId", JSON.stringify(id));
@@ -81,6 +89,8 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
                 updateFilters,
                 favorites,
                 updateFavorites,
+                currentPokemonList,
+                setCurrentPokemonList,
             }}
         >
             {children}
