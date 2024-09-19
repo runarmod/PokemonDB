@@ -132,7 +132,7 @@ describe("Snapshot test", () => {
             updateFavorites: vi.fn(),
         });
 
-        // Mockign of API call handled by handlers
+        // Mocking of API call handled by handlers
         const { asFragment } = render(<PokemonCard />);
         expect(asFragment()).toMatchSnapshot();
     });
