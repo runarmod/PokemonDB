@@ -256,4 +256,18 @@ describe("SortAndFilter - General tests", () => {
             });
         });
     });
+
+    describe("Snapshot test", () => {
+        it("matches snapshot", () => {
+            (useAppContext as Mock).mockReturnValue({
+                sortingOrder: SortingType.ID,
+                changeSortingOrder: vi.fn(),
+                updateFilters: vi.fn(),
+                filters: ["favorite", "fire", "water"],
+            });
+
+            const { asFragment } = render(<SortAndFilter />);
+            expect(asFragment()).toMatchSnapshot();
+        });
+    });
 });
