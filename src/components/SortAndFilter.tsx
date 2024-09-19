@@ -29,7 +29,7 @@ export default function SortAndFilter() {
                 }
             >
                 <img
-                    src={`${isMenuOpen ? X : SortFilter}?${isMenuOpen}`}
+                    src={isMenuOpen ? X : SortFilter}
                     alt={isMenuOpen ? "Close" : "Sort/filter"}
                 />
             </button>
