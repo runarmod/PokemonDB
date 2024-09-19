@@ -125,7 +125,7 @@ describe("PokemonCard - General tests", () => {
 });
 
 describe("Snapshot test", () => {
-    it("matches snapshot", () => { 
+    it("matches snapshot", () => {
         (useAppContext as Mock).mockReturnValue({
             selectedPokemonId: 1,
             favorites: [0],
@@ -147,61 +147,75 @@ describe("PokemonCard - Favorites test", () => {
 
     it("should display empty star when a Pokemon is not favorited", () => {
         (useAppContext as Mock).mockReturnValue({
-        selectedPokemonId: 1,
-        favorites: [],
-        updateFavorites: mockUpdateFavorites,
+            selectedPokemonId: 1,
+            favorites: [],
+            updateFavorites: mockUpdateFavorites,
         });
         render(<PokemonCard />);
 
         const starIcon = screen.getByAltText("Star image");
-        expect(starIcon).toHaveAttribute("src", "/project1/src/assets/star.png");
+        expect(starIcon).toHaveAttribute(
+            "src",
+            "/project1/src/assets/star.png"
+        );
     });
 
     it("should display empty star when other Pokemons are favorited", () => {
         (useAppContext as Mock).mockReturnValue({
-        selectedPokemonId: 1,
-        favorites: [2],
-        updateFavorites: mockUpdateFavorites,
+            selectedPokemonId: 1,
+            favorites: [2],
+            updateFavorites: mockUpdateFavorites,
         });
         render(<PokemonCard />);
 
         const starIcon = screen.getByAltText("Star image");
-        expect(starIcon).toHaveAttribute("src", "/project1/src/assets/star.png");
+        expect(starIcon).toHaveAttribute(
+            "src",
+            "/project1/src/assets/star.png"
+        );
     });
 
     it("should display filled star when a Pokemon is favorited", () => {
         (useAppContext as Mock).mockReturnValue({
-        selectedPokemonId: 1,
-        favorites: [1],
-        updateFavorites: mockUpdateFavorites,
+            selectedPokemonId: 1,
+            favorites: [1],
+            updateFavorites: mockUpdateFavorites,
         });
         render(<PokemonCard />);
 
         const filledStarIcon = screen.getByAltText("Star image");
-        expect(filledStarIcon).toHaveAttribute("src", "/project1/src/assets/star_filled.png");
+        expect(filledStarIcon).toHaveAttribute(
+            "src",
+            "/project1/src/assets/star_filled.png"
+        );
     });
 
     it("should display filled star when a Pokemon, amongst others, is favorited ", () => {
         (useAppContext as Mock).mockReturnValue({
-        selectedPokemonId: 1,
-        favorites: [1,2],
-        updateFavorites: mockUpdateFavorites,
+            selectedPokemonId: 1,
+            favorites: [1, 2],
+            updateFavorites: mockUpdateFavorites,
         });
         render(<PokemonCard />);
 
         const filledStarIcon = screen.getByAltText("Star image");
-        expect(filledStarIcon).toHaveAttribute("src", "/project1/src/assets/star_filled.png");
+        expect(filledStarIcon).toHaveAttribute(
+            "src",
+            "/project1/src/assets/star_filled.png"
+        );
     });
 
     it("should add as favorite when clicking on empty favorite button", async () => {
         (useAppContext as Mock).mockReturnValue({
-        selectedPokemonId: 1,
-        favorites: [], 
-        updateFavorites: mockUpdateFavorites,
+            selectedPokemonId: 1,
+            favorites: [],
+            updateFavorites: mockUpdateFavorites,
         });
         render(<PokemonCard />);
 
-        const favoriteButton = screen.getByRole("button", { name: "Star image" });
+        const favoriteButton = screen.getByRole("button", {
+            name: "Star image",
+        });
         userEvent.click(favoriteButton);
 
         await waitFor(() => {
@@ -211,29 +225,33 @@ describe("PokemonCard - Favorites test", () => {
 
     it("should be add to list of other favorites when clicking on empty favorite button", async () => {
         (useAppContext as Mock).mockReturnValue({
-        selectedPokemonId: 1,
-        favorites: [2], 
-        updateFavorites: mockUpdateFavorites,
+            selectedPokemonId: 1,
+            favorites: [2],
+            updateFavorites: mockUpdateFavorites,
         });
         render(<PokemonCard />);
 
-        const favoriteButton = screen.getByRole("button", { name: "Star image" });
+        const favoriteButton = screen.getByRole("button", {
+            name: "Star image",
+        });
         userEvent.click(favoriteButton);
 
         await waitFor(() => {
-            expect(mockUpdateFavorites).toHaveBeenCalledWith([2,1]);
+            expect(mockUpdateFavorites).toHaveBeenCalledWith([2, 1]);
         });
     });
 
     it("should be removed as favorite when clicking on filled favorite button", async () => {
         (useAppContext as Mock).mockReturnValue({
-        selectedPokemonId: 1,
-        favorites: [1], 
-        updateFavorites: mockUpdateFavorites,
+            selectedPokemonId: 1,
+            favorites: [1],
+            updateFavorites: mockUpdateFavorites,
         });
         render(<PokemonCard />);
 
-        const favoriteButton = screen.getByRole("button", { name: "Star image" });
+        const favoriteButton = screen.getByRole("button", {
+            name: "Star image",
+        });
         userEvent.click(favoriteButton);
 
         await waitFor(() => {
@@ -243,17 +261,19 @@ describe("PokemonCard - Favorites test", () => {
 
     it("should remove only one Pokemon from favorite when clicking on filled favorite button", async () => {
         (useAppContext as Mock).mockReturnValue({
-        selectedPokemonId: 1,
-        favorites: [1,2], 
-        updateFavorites: mockUpdateFavorites,
+            selectedPokemonId: 1,
+            favorites: [1, 2],
+            updateFavorites: mockUpdateFavorites,
         });
         render(<PokemonCard />);
 
-        const favoriteButton = screen.getByRole("button", { name: "Star image" });
+        const favoriteButton = screen.getByRole("button", {
+            name: "Star image",
+        });
         userEvent.click(favoriteButton);
 
         await waitFor(() => {
             expect(mockUpdateFavorites).toHaveBeenCalledWith([2]);
         });
     });
-})
+});
