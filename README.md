@@ -2,15 +2,15 @@
 
 ## Usage
 
-- `npm install` to install dependencies.
-- `npm run dev` to start the development server
-- `npm run prettier` to check code formatting
-  - `npm run prettier:fix` to fix formatting
-- `npm run lint` to check for linting errors
-  - `npm run lint:fix` to fix autofixable linting errors
-- `npm test` to run all tests
-- `npm run build` to build the project
-  - it will be built in the `dist` folder
+-   `npm install` to install dependencies.
+-   `npm run dev` to start the development server
+-   `npm run prettier` to check code formatting
+    -   `npm run prettier:fix` to fix formatting
+-   `npm run lint` to check for linting errors
+    -   `npm run lint:fix` to fix autofixable linting errors
+-   `npm test` to run all tests
+-   `npm run build` to build the project
+    -   it will be built in the `dist` folder
 
 ## Choices
 
@@ -36,9 +36,9 @@ We are testing most of the components of the project. We also test the utility f
 
 How/what we are testing:
 
-- our own components
-  - including props, state and user interaction
-- use mocking so that we do not depend on the API during testing
-- use snapshot testing to ensure that the components are rendered as expected
+-   our own components
+    -   including props, state and user interaction
+-   use mocking so that we do not depend on the API during testing
+-   use snapshot testing to ensure that the components are rendered as expected
 
 We have also done manual testing to ensure that the application works as expected. Quite a lot of time have been spent on testing the application on different browsers and devices with different screen sizes.
