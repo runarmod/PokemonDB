@@ -46,7 +46,8 @@
     margin-right: auto;
 }
 
-.filterListEntry > *, .sortListEntry > * {
+.filterListEntry > *,
+.sortListEntry > * {
     cursor: pointer;
 }
 
