@@ -92,7 +92,7 @@ describe("SortAndFilter - General tests", () => {
             expect(selectedRadioButtons).toHaveLength(1);
         });
 
-        it("should not change sortingOrder when clicking the same radiobutton", () => {
+        it("should not change sortingOrder when clicking the same radiobutton", async () => {
             const mockChangeSortingOrder = vi.fn();
             (useAppContext as Mock).mockReturnValue({
                 sortingOrder: SortingType.ID,
@@ -107,12 +107,12 @@ describe("SortAndFilter - General tests", () => {
             expect(radioButton).toBeChecked();
             userEvent.click(radioButton);
 
-            waitFor(() => {
+            await waitFor(() => {
                 expect(mockChangeSortingOrder).toBeCalledTimes(0);
             });
         });
 
-        it("should change when clicking another radiobutton", () => {
+        it("should change when clicking another radiobutton", async () => {
             const mockChangeSortingOrder = vi.fn();
             (useAppContext as Mock).mockReturnValue({
                 sortingOrder: SortingType.ID,
@@ -128,7 +128,7 @@ describe("SortAndFilter - General tests", () => {
             const radioButtonASC = screen.getByLabelText("Name A-Z");
             userEvent.click(radioButtonASC);
 
-            waitFor(() => {
+            await waitFor(() => {
                 expect(mockChangeSortingOrder).toHaveBeenCalledTimes(1);
                 expect(mockChangeSortingOrder).toHaveBeenCalledWith(
                     SortingType.NAME_ASC
@@ -207,7 +207,7 @@ describe("SortAndFilter - General tests", () => {
             expect(checkedCheckboxes).toHaveLength(3);
         });
 
-        it("should add filter when when clicking unchecked checkbox", () => {
+        it("should add filter when when clicking unchecked checkbox", async () => {
             const mockUpdateFilters = vi.fn();
             (useAppContext as Mock).mockReturnValue({
                 sortingOrder: SortingType.ID,
@@ -223,17 +223,13 @@ describe("SortAndFilter - General tests", () => {
             expect(waterCheckbox).toBeInTheDocument();
             expect((waterCheckbox as HTMLInputElement).checked).toBe(false);
             userEvent.click(waterCheckbox);
-            waitFor(() => {
+            await waitFor(() => {
                 expect(mockUpdateFilters).toHaveBeenCalledTimes(1);
-                expect(mockUpdateFilters).toHaveBeenCalledWith([
-                    "favorite",
-                    "fire",
-                    "water",
-                ]);
+                expect(mockUpdateFilters).toHaveBeenCalledWith("water");
             });
         });
 
-        it("should remove filter when when clicking checked checkbox", () => {
+        it("should remove filter when when clicking checked checkbox", async () => {
             const mockUpdateFilters = vi.fn();
             (useAppContext as Mock).mockReturnValue({
                 sortingOrder: SortingType.ID,
@@ -247,12 +243,9 @@ describe("SortAndFilter - General tests", () => {
             expect(fireCheckbox).toBeInTheDocument();
             expect(fireCheckbox).toBeChecked();
             userEvent.click(fireCheckbox);
-            waitFor(() => {
+            await waitFor(() => {
                 expect(mockUpdateFilters).toHaveBeenCalledTimes(1);
-                expect(mockUpdateFilters).toHaveBeenCalledWith([
-                    "favorite",
-                    "water",
-                ]);
+                expect(mockUpdateFilters).toHaveBeenCalledWith("fire");
             });
         });
     });
