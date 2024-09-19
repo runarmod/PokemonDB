@@ -12,12 +12,11 @@
     flex-direction: column;
     border-radius: 10px;
     overflow: auto;
-    background-color: lightgray;
     padding: 0 10px;
     color: white;
     background-color: #303030;
     box-shadow: 0 15px 30px #101010;
-    height: 95vh;
+    height: calc(100vh - 2 * 12px);
 }
 
 .sortAndFilter > h2 {
@@ -94,13 +93,15 @@ h2 {
     }
 
     .sortAndFilter {
-        max-height: 0;
+        height: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease-out;
+        transition: height 0.3s ease-out;
+        margin-top: 0;
     }
 
     .sortAndFilter.active {
-        max-height: 85vh;
+        /* Icon is 30px. There are 3 margins on 12px each */
+        height: calc(100vh - 30px - 3 * 12px);
         overflow: auto;
     }
 
