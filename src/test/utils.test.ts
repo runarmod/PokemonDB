@@ -16,6 +16,10 @@ describe("capitalizeFirstLetter", () => {
     test("capitalize first letter when already capitalized", () => {
         expect(capitalizeFirstLetter("Bulbasaur")).toBe("Bulbasaur");
     });
+
+    test("capitalize first letter with empty string", () => {
+        expect(capitalizeFirstLetter("")).toBe("");
+    });
 });
 
 describe("Sorting and filtering", () => {
@@ -57,4 +61,18 @@ describe("Sorting and filtering", () => {
             filterAndSortPokemon(l, ["favorite"], SortingType.ID, [1, 4])
         ).toStrictEqual([l[0], l[1]]);
     });
+
+    test("filter and sort", () => {
+        expect(
+            filterAndSortPokemon(l, ["favorite"], SortingType.NAME_DESC, [1, 4])
+        ).toStrictEqual([l[1], l[0]]);
+    });
+
+    test("filter and sort empty list", () => {
+        expect(
+            filterAndSortPokemon([], [], SortingType.ID, [])
+        ).toStrictEqual([]);
+    });
+
+    
 });
