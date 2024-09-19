@@ -1,20 +1,34 @@
+#SortAndFilterWrapper {
+    z-index: 9;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
 .sortAndFilter {
     width: 150px;
+    margin: 12px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    background-color: lightgray;
+    overflow: auto;
     padding: 0 10px;
     color: white;
     background-color: #303030;
     box-shadow: 0 15px 30px #101010;
-    height: 95vh;
+    height: calc(100vh - 2 * 12px);
+    transition: height 0.3s ease-out;
+}
+
+.sortAndFilter > h2 {
+    margin-top: 10px;
+    text-align: center;
 }
 
 .filterList,
 .sortList {
     list-style-type: none;
-    padding: 0px;
+    padding: 10px 0;
     margin: 0px;
 }
 
@@ -22,8 +36,22 @@
 .sortListEntry {
     display: flex;
     flex-direction: row;
-    justify-content: left;
+    justify-content: center;
     margin: 1px;
+    gap: 10px;
+}
+
+.filterListEntry > label,
+.sortListEntry > label {
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+}
+
+.filterListEntry > *,
+.sortListEntry > * {
+    cursor: pointer;
 }
 
 .starIcon {
@@ -37,4 +65,48 @@ h2 {
 
 #favoriteIcon {
     width: 20px;
+}
+
+.sortFilterMenu {
+    display: none;
+    margin: 12px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.sortFilterMenu > img {
+    width: 100%;
+    float: right;
+}
+
+@media (max-width: 1200px) {
+    #SortAndFilterWrapper {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+
+    .sortAndFilter {
+        height: 0;
+        overflow: hidden;
+        transition: height 0.3s ease-out;
+        margin-top: 0;
+    }
+
+    .sortAndFilter.active {
+        /* Icon is 30px. There are 3 margins on 12px each */
+        height: calc(100vh - 30px - 3 * 12px);
+        overflow: auto;
+    }
+
+    .sortFilterMenu {
+        display: block;
+    }
 }
