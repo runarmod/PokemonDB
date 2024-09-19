@@ -24,7 +24,7 @@ vi.mock(import("@tanstack/react-query"), async (importOriginal) => {
 });
 
 describe("PokemonList - General tests", () => {
-    let changeSelectedPokemonId = vi.fn();
+    const changeSelectedPokemonId = vi.fn();
 
     beforeEach(() => {
         (useAppContext as Mock).mockReturnValue({
@@ -33,7 +33,7 @@ describe("PokemonList - General tests", () => {
             sortingOrder: "asc",
             filters: {},
             favorites: [],
-            currentPokemonList: [],
+            currentPokemonList: mockPokemonData,
             setCurrentPokemonList: vi.fn(),
         });
     });
@@ -68,6 +68,8 @@ describe("PokemonList - General tests", () => {
             hasNextPage: false,
         });
 
+        // mock the scrollIntoView function as it fails the test and it is not necessary for the test.
+        window.HTMLLIElement.prototype.scrollIntoView = vi.fn();
         render(<PokemonList limit={10} />);
 
         expect(await screen.findByText("Bulbasaur")).toBeInTheDocument();
