@@ -3,412 +3,425 @@
 exports[`SortAndFilter - General tests > Snapshot test > matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="sortAndFilter"
+    id="SortAndFilterWrapper"
   >
-    <h2>
-      Sort by
-    </h2>
-    <ul
-      class="sortList"
+    <button
+      aria-label="Open sort/filter options"
+      class="sortFilterMenu "
     >
-      <li
-        class="sortListEntry"
-      >
-        <input
-          checked=""
-          id="rbtId"
-          name="sorting"
-          type="radio"
-          value="2"
-        />
-        <label
-          for="rbtId"
-        >
-          #ID
-        </label>
-      </li>
-      <li
-        class="sortListEntry"
-      >
-        <input
-          id="rbtName"
-          name="sorting"
-          type="radio"
-          value="0"
-        />
-        <label
-          for="rbtName"
-        >
-          Name A-Z
-        </label>
-      </li>
-      <li
-        class="sortListEntry"
-      >
-        <input
-          id="rbtNameReversed"
-          name="sorting"
-          type="radio"
-          value="1"
-        />
-        <label
-          for="rbtNameReversed"
-        >
-          Name Z-A
-        </label>
-      </li>
-    </ul>
-    <h2>
-      Filters
-    </h2>
-    <ul
-      class="filterList"
+      <img
+        alt="Sort/filter"
+        src="/project1/src/assets/sort_filter.png"
+      />
+    </button>
+    <div
+      class="sortAndFilter "
     >
-      <li
-        class="filterListEntry"
+      <h2>
+        Sort by
+      </h2>
+      <ul
+        class="sortList"
       >
-        <input
-          checked=""
-          id="checkFavorite"
-          type="checkbox"
-          value="favorite"
-        />
-        <label
-          for="checkFavorite"
+        <li
+          class="sortListEntry"
         >
-          <img
-            alt="favorite icon"
-            id="favoriteIcon"
-            src="/project1/src/assets/star_filled.png"
+          <input
+            checked=""
+            id="rbtId"
+            name="sorting"
+            type="radio"
+            value="2"
           />
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checknormal"
-          type="checkbox"
-          value="normal"
-        />
-        <label
-          for="checknormal"
-        >
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(159, 161, 159);"
+            for="rbtId"
           >
-            normal
+            #ID
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          checked=""
-          id="checkfire"
-          type="checkbox"
-          value="fire"
-        />
-        <label
-          for="checkfire"
+        </li>
+        <li
+          class="sortListEntry"
         >
+          <input
+            id="rbtName"
+            name="sorting"
+            type="radio"
+            value="0"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(230, 40, 41);"
+            for="rbtName"
           >
-            fire
+            Name A-Z
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          checked=""
-          id="checkwater"
-          type="checkbox"
-          value="water"
-        />
-        <label
-          for="checkwater"
+        </li>
+        <li
+          class="sortListEntry"
         >
+          <input
+            id="rbtNameReversed"
+            name="sorting"
+            type="radio"
+            value="1"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(41, 128, 239);"
+            for="rbtNameReversed"
           >
-            water
+            Name Z-A
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
+        </li>
+      </ul>
+      <h2>
+        Filters
+      </h2>
+      <ul
+        class="filterList"
       >
-        <input
-          id="checkelectric"
-          type="checkbox"
-          value="electric"
-        />
-        <label
-          for="checkelectric"
+        <li
+          class="filterListEntry"
         >
+          <input
+            checked=""
+            id="checkFavorite"
+            type="checkbox"
+            value="favorite"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(250, 192, 0);"
+            for="checkFavorite"
           >
-            electric
+            <img
+              alt="favorite icon"
+              id="favoriteIcon"
+              src="/project1/src/assets/star_filled.png"
+            />
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkgrass"
-          type="checkbox"
-          value="grass"
-        />
-        <label
-          for="checkgrass"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checknormal"
+            type="checkbox"
+            value="normal"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(63, 161, 41);"
+            for="checknormal"
           >
-            grass
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(159, 161, 159);"
+            >
+              normal
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkice"
-          type="checkbox"
-          value="ice"
-        />
-        <label
-          for="checkice"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            checked=""
+            id="checkfire"
+            type="checkbox"
+            value="fire"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(61, 206, 243);"
+            for="checkfire"
           >
-            ice
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(230, 40, 41);"
+            >
+              fire
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkfighting"
-          type="checkbox"
-          value="fighting"
-        />
-        <label
-          for="checkfighting"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            checked=""
+            id="checkwater"
+            type="checkbox"
+            value="water"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(255, 128, 0);"
+            for="checkwater"
           >
-            fighting
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(41, 128, 239);"
+            >
+              water
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkpoison"
-          type="checkbox"
-          value="poison"
-        />
-        <label
-          for="checkpoison"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkelectric"
+            type="checkbox"
+            value="electric"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(145, 65, 203);"
+            for="checkelectric"
           >
-            poison
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(250, 192, 0);"
+            >
+              electric
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkground"
-          type="checkbox"
-          value="ground"
-        />
-        <label
-          for="checkground"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkgrass"
+            type="checkbox"
+            value="grass"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(145, 81, 33);"
+            for="checkgrass"
           >
-            ground
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(63, 161, 41);"
+            >
+              grass
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkflying"
-          type="checkbox"
-          value="flying"
-        />
-        <label
-          for="checkflying"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkice"
+            type="checkbox"
+            value="ice"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(129, 185, 239);"
+            for="checkice"
           >
-            flying
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(61, 206, 243);"
+            >
+              ice
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkpsychic"
-          type="checkbox"
-          value="psychic"
-        />
-        <label
-          for="checkpsychic"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkfighting"
+            type="checkbox"
+            value="fighting"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(239, 65, 121);"
+            for="checkfighting"
           >
-            psychic
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(255, 128, 0);"
+            >
+              fighting
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkbug"
-          type="checkbox"
-          value="bug"
-        />
-        <label
-          for="checkbug"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkpoison"
+            type="checkbox"
+            value="poison"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(145, 161, 25);"
+            for="checkpoison"
           >
-            bug
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(145, 65, 203);"
+            >
+              poison
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkghost"
-          type="checkbox"
-          value="ghost"
-        />
-        <label
-          for="checkghost"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkground"
+            type="checkbox"
+            value="ground"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(112, 65, 112);"
+            for="checkground"
           >
-            ghost
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(145, 81, 33);"
+            >
+              ground
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkdragon"
-          type="checkbox"
-          value="dragon"
-        />
-        <label
-          for="checkdragon"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkflying"
+            type="checkbox"
+            value="flying"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(80, 96, 225);"
+            for="checkflying"
           >
-            dragon
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(129, 185, 239);"
+            >
+              flying
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkdark"
-          type="checkbox"
-          value="dark"
-        />
-        <label
-          for="checkdark"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkpsychic"
+            type="checkbox"
+            value="psychic"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(98, 77, 78);"
+            for="checkpsychic"
           >
-            dark
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(239, 65, 121);"
+            >
+              psychic
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checksteel"
-          type="checkbox"
-          value="steel"
-        />
-        <label
-          for="checksteel"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkbug"
+            type="checkbox"
+            value="bug"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(96, 161, 184);"
+            for="checkbug"
           >
-            steel
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(145, 161, 25);"
+            >
+              bug
+            </span>
           </label>
-        </label>
-      </li>
-      <li
-        class="filterListEntry"
-      >
-        <input
-          id="checkfairy"
-          type="checkbox"
-          value="fairy"
-        />
-        <label
-          for="checkfairy"
+        </li>
+        <li
+          class="filterListEntry"
         >
+          <input
+            id="checkghost"
+            type="checkbox"
+            value="ghost"
+          />
           <label
-            class="pokemonTypeLabel"
-            style="background-color: rgb(239, 112, 239);"
+            for="checkghost"
           >
-            fairy
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(112, 65, 112);"
+            >
+              ghost
+            </span>
           </label>
-        </label>
-      </li>
-    </ul>
+        </li>
+        <li
+          class="filterListEntry"
+        >
+          <input
+            id="checkdragon"
+            type="checkbox"
+            value="dragon"
+          />
+          <label
+            for="checkdragon"
+          >
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(80, 96, 225);"
+            >
+              dragon
+            </span>
+          </label>
+        </li>
+        <li
+          class="filterListEntry"
+        >
+          <input
+            id="checkdark"
+            type="checkbox"
+            value="dark"
+          />
+          <label
+            for="checkdark"
+          >
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(98, 77, 78);"
+            >
+              dark
+            </span>
+          </label>
+        </li>
+        <li
+          class="filterListEntry"
+        >
+          <input
+            id="checksteel"
+            type="checkbox"
+            value="steel"
+          />
+          <label
+            for="checksteel"
+          >
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(96, 161, 184);"
+            >
+              steel
+            </span>
+          </label>
+        </li>
+        <li
+          class="filterListEntry"
+        >
+          <input
+            id="checkfairy"
+            type="checkbox"
+            value="fairy"
+          />
+          <label
+            for="checkfairy"
+          >
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(239, 112, 239);"
+            >
+              fairy
+            </span>
+          </label>
+        </li>
+      </ul>
+    </div>
   </div>
 </DocumentFragment>
 `;
