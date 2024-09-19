@@ -13,12 +13,14 @@
         rgb(254, 235, 235) 0%,
         rgb(255, 121, 121) 100%
     );
+    justify-content: center;
 }
 
 #PokemonCardContainer > p {
     margin: 0 auto;
     align-self: center;
     font-weight: bold;
+    text-align: center;
 }
 
 #ImageContainer {
