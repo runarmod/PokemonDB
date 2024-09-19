@@ -69,10 +69,8 @@ describe("Sorting and filtering", () => {
     });
 
     test("filter and sort empty list", () => {
-        expect(
-            filterAndSortPokemon([], [], SortingType.ID, [])
-        ).toStrictEqual([]);
+        expect(filterAndSortPokemon([], [], SortingType.ID, [])).toStrictEqual(
+            []
+        );
     });
-
-    
 });
