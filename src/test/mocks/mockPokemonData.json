@@ -45,5 +45,27 @@
                 "ability": { "name": "overgrow" }
             }
         ]
+    },
+    {
+        "id": 4,
+        "name": "charmander",
+        "height": 60,
+        "weight": 8.5,
+        "sprites": {
+            "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+        },
+        "types": [
+            {
+                "type": { "name": "fire" }
+            }
+        ],
+        "abilities": [
+            {
+                "ability": { "name": "blaze" }
+            },
+            {
+                "ability": { "name": "solar-power" }
+            }
+        ]
     }
 ]
