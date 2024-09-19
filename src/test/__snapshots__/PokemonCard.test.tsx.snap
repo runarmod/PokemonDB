@@ -1,0 +1,99 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Snapshot test > matches snapshot 1`] = `
+<DocumentFragment>
+  <article
+    id="PokemonCardContainer"
+  >
+    <figure
+      id="ImageContainer"
+    >
+      <button
+        id="favoritesButton"
+      >
+        <img
+          alt="Star image"
+          id="StarIcon"
+          src="/project1/src/assets/star.png"
+        />
+      </button>
+      <img
+        alt="Bulbasaur image"
+        id="PokemonImage"
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+      />
+    </figure>
+    <div
+      id="StatContainer"
+    >
+      <section>
+        <h1>
+          Bulbasaur
+        </h1>
+        <h2
+          style="opacity: 0.5;"
+        >
+          #0001
+        </h2>
+      </section>
+      <div
+        id="StatGrid"
+      >
+        <section>
+          <h3>
+            Height
+          </h3>
+          <p>
+            70 cm
+          </p>
+        </section>
+        <section>
+          <h3>
+            Weight
+          </h3>
+          <p>
+            6.9 kg
+          </p>
+        </section>
+        <section>
+          <h3>
+            Types
+          </h3>
+          <ul>
+            <li
+              class="typeListEntry"
+            >
+              <label
+                class="pokemonTypeLabel"
+                style="background-color: rgb(63, 161, 41);"
+              >
+                grass
+              </label>
+            </li>
+            <li
+              class="typeListEntry"
+            >
+              <label
+                class="pokemonTypeLabel"
+                style="background-color: rgb(145, 65, 203);"
+              >
+                poison
+              </label>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>
+            Abilities
+          </h3>
+          <ul>
+            <li>
+              Overgrow
+            </li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </article>
+</DocumentFragment>
+`;

@@ -124,6 +124,20 @@ describe("PokemonCard - General tests", () => {
     });
 });
 
+describe("Snapshot test", () => {
+    it("matches snapshot", () => { 
+        (useAppContext as Mock).mockReturnValue({
+            selectedPokemonId: 1,
+            favorites: [0],
+            updateFavorites: vi.fn(),
+        });
+
+        // Mockign of API call handled by handlers
+        const { asFragment } = render(<PokemonCard />);
+        expect(asFragment()).toMatchSnapshot();
+    });
+});
+
 describe("PokemonCard - Favorites test", () => {
     const mockUpdateFavorites = vi.fn();
 
