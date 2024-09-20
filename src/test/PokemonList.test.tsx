@@ -102,9 +102,13 @@ describe("PokemonList - General tests", () => {
         expect(await screen.findByText("Bulbasaur")).toBeInTheDocument();
         expect(await screen.findByText("Ivysaur")).toBeInTheDocument();
         expect(await screen.findByText("Charmander")).toBeInTheDocument();
-        expect(screen.getByAltText("Bulbasaur image")).toBeInTheDocument();
-        expect(screen.getByAltText("Ivysaur image")).toBeInTheDocument();
-        expect(screen.getByAltText("Charmander image")).toBeInTheDocument();
+        expect(
+            await screen.findByAltText("Bulbasaur image")
+        ).toBeInTheDocument();
+        expect(await screen.findByAltText("Ivysaur image")).toBeInTheDocument();
+        expect(
+            await screen.findByAltText("Charmander image")
+        ).toBeInTheDocument();
     });
 
     it("should load more Pokémon when 'Load More' is clicked", async () => {
@@ -180,11 +184,9 @@ describe("PokemonList - General tests", () => {
 
         render(<PokemonList limit={10} />);
         const pokemonListItems = await screen.findAllByRole("button");
-        await waitFor(() => {
-            expect(pokemonListItems[0]).toHaveTextContent("Charmander");
-            expect(pokemonListItems[1]).toHaveTextContent("Ivysaur");
-            expect(pokemonListItems[2]).toHaveTextContent("Bulbasaur");
-        });
+        expect(pokemonListItems[0]).toHaveTextContent("Charmander");
+        expect(pokemonListItems[1]).toHaveTextContent("Ivysaur");
+        expect(pokemonListItems[2]).toHaveTextContent("Bulbasaur");
     });
 
     it("should scroll the selected Pokémon into view", async () => {
@@ -208,8 +210,7 @@ describe("PokemonList - General tests", () => {
 
         render(<PokemonList limit={10} />);
         const pokemonListItems = await screen.findAllByRole("button");
-        await waitFor(() => {
-            expect(pokemonListItems[0]).toHaveTextContent("Load More");
-        });
+        expect(pokemonListItems).toHaveLength(1);
+        expect(pokemonListItems[0]).toHaveTextContent("Load More");
     });
 });
