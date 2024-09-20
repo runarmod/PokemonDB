@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PokemonCardScroller - Snapshot test > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    id="ScrollerWrapper"
+  >
+    <button>
+      <img
+        alt="Up Arrow"
+        src="/project1/src/assets/up_arrow.svg"
+      />
+    </button>
+    <div>
+      PokemonCard
+    </div>
+    <button>
+      <img
+        alt="Down Arrow"
+        src="/project1/src/assets/down_arrow.svg"
+      />
+    </button>
+  </div>
+</DocumentFragment>
+`;

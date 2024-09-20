@@ -1,12 +1,16 @@
+#PokemonListWrapper {
+    z-index: 10;
+}
+
 .list {
     list-style-type: none;
     padding-left: 0;
     width: 200px;
-    margin: 0;
+    margin: 12px;
     background-color: #303030;
     border-radius: 8px;
     box-shadow: 0 15px 30px #101010;
-    height: 95vh;
+    max-height: calc(100vh - 2 * 12px);
     overflow-y: auto;
     transition: max-height 0.3s ease-out;
 }
@@ -84,9 +88,7 @@
 
 .hamburger {
     display: none;
-    position: absolute;
-    top: 12px;
-    left: 20px;
+    margin: 12px;
     width: 30px;
     height: 30px;
     cursor: pointer;
@@ -112,14 +114,21 @@
         opacity 0.3s;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 945px) {
+    #PokemonListWrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+
     .list {
         max-height: 0;
         transition: max-height 0.3s ease-out;
     }
 
     .list.active {
-        max-height: 85vh;
+        /* Icon is 30px. There are 3 margins on 12px each */
+        max-height: calc(100vh - 30px - 3 * 12px);
     }
 
     .hamburger {
