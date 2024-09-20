@@ -1,0 +1,64 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`PokemonList - Snapshot test > matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    id="PokemonListWrapper"
+  >
+    <button
+      aria-label="Toggle Menu"
+      class="hamburger "
+    >
+      <div
+        class="hamburgerLine"
+      />
+      <div
+        class="hamburgerLine"
+      />
+      <div
+        class="hamburgerLine"
+      />
+    </button>
+    <ul
+      class="list "
+    >
+      <li
+        aria-pressed="true"
+        class="selected"
+        role="button"
+        tabindex="0"
+      >
+        <img
+          alt="Bulbasaur image"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+        />
+        Bulbasaur
+      </li>
+      <li
+        aria-pressed="false"
+        class=""
+        role="button"
+        tabindex="0"
+      >
+        <img
+          alt="Ivysaur image"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+        />
+        Ivysaur
+      </li>
+      <li
+        aria-pressed="false"
+        class=""
+        role="button"
+        tabindex="0"
+      >
+        <img
+          alt="Charmander image"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+        />
+        Charmander
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
