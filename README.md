@@ -1,5 +1,9 @@
 # Documentation project 1 - Group 26
 
+Website: <http://it2810-26.idi.ntnu.no/project1/>
+
+Repository: <https://git.ntnu.no/IT2810-H24/T26-Project-1>
+
 ## Usage
 
 -   `npm install` to install dependencies.
@@ -16,7 +20,7 @@
 
 For the design we chose to have a list of Pokémon to the left of the screen, and a sorting and filter section to the right, as well as showing detailed information about one Pokémon in the middle of the screen. For smaller screens both the Pokémon-list and the sorting/filter section collapses into a button to make for a better user experience.
 
-We chose to wrap our application (in [`App.tsx`](./src/App.tsx)) in our `ContextProvider`, such that we have access to some global state in the application. The main purpose of the context is to keep track of which Pokémon are currently shown, as well as the current filters and sorting method. We did this to prevent having to send state variables and set functions down the component hierarchy. We believe this results in easier code to read and easier state management.
+We chose to wrap our application (in [`App.tsx`](./src/App.tsx)) in our `ContextProvider`, such that we have access to some global state in the application. The main purpose of the context is to keep track of which Pokémon are currently shown, as well as the current filters and sorting method. If we did did not use the context, the states would have to be stored and sent down the component hierarchy from `App.tsx`, since our components that need to know about the same state are not directly related. This is something we did not want, as `App.tsx` would become cluttered, and we think our solution results in easier code to read and maintain.
 
 ### Unnecessary API calls
 
@@ -30,7 +34,7 @@ Our filtering of Pokémon might not be as intuitive as we would want it to be, b
 
 We use `sessionStorage` to store the user's currently selected Pokémon, filters, and sorting methods. This is done to make the user experience better, as the user keeps their state in the application even if they refresh or close and reopen the page (in one session). We do not use `localStorage` for that since we do not want to keep this state between sessions.
 
-We also use `localStorage` to store the user's favorite Pokémon, such that they are saved between sessions.
+We use `localStorage` to store the user's favorite Pokémon, such that they are saved between sessions.
 
 ## What's tested
 
