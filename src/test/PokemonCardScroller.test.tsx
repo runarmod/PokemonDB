@@ -127,14 +127,14 @@ describe("PokemonCardScroller - General tests", () => {
 
         await waitFor(() => {
             expect(mockChangeSelectedPokemonId).toHaveBeenCalledTimes(1);
-            expect(mockChangeSelectedPokemonId).toHaveBeenCalledWith(2);
+            expect(mockChangeSelectedPokemonId).toHaveBeenCalledWith(4);
         });
     });
 
     it("should loop around when clicking down arrow from last Pokemon", async () => {
         const mockChangeSelectedPokemonId = vi.fn();
         (useAppContext as Mock).mockReturnValue({
-            selectedPokemonId: 2,
+            selectedPokemonId: 4,
             changeSelectedPokemonId: mockChangeSelectedPokemonId,
             currentPokemonList: mockPokemonData,
         });

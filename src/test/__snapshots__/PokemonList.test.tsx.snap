@@ -2,59 +2,63 @@
 
 exports[`PokemonList - Snapshot test > matches snapshot 1`] = `
 <DocumentFragment>
-  <button
-    aria-label="Toggle Menu"
-    class="hamburger "
+  <div
+    id="PokemonListWrapper"
   >
-    <div
-      class="hamburgerLine"
-    />
-    <div
-      class="hamburgerLine"
-    />
-    <div
-      class="hamburgerLine"
-    />
-  </button>
-  <ul
-    class="list "
-  >
-    <li
-      aria-pressed="true"
-      class="selected"
-      role="button"
-      tabindex="0"
+    <button
+      aria-label="Toggle Menu"
+      class="hamburger "
     >
-      <img
-        alt="Bulbasaur image"
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+      <div
+        class="hamburgerLine"
       />
-      Bulbasaur
-    </li>
-    <li
-      aria-pressed="false"
-      class=""
-      role="button"
-      tabindex="0"
+      <div
+        class="hamburgerLine"
+      />
+      <div
+        class="hamburgerLine"
+      />
+    </button>
+    <ul
+      class="list "
     >
-      <img
-        alt="Ivysaur image"
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
-      />
-      Ivysaur
-    </li>
-    <li
-      aria-pressed="false"
-      class=""
-      role="button"
-      tabindex="0"
-    >
-      <img
-        alt="Charmander image"
-        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
-      />
-      Charmander
-    </li>
-  </ul>
+      <li
+        aria-pressed="true"
+        class="selected"
+        role="button"
+        tabindex="0"
+      >
+        <img
+          alt="Bulbasaur image"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+        />
+        Bulbasaur
+      </li>
+      <li
+        aria-pressed="false"
+        class=""
+        role="button"
+        tabindex="0"
+      >
+        <img
+          alt="Ivysaur image"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+        />
+        Ivysaur
+      </li>
+      <li
+        aria-pressed="false"
+        class=""
+        role="button"
+        tabindex="0"
+      >
+        <img
+          alt="Charmander image"
+          src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
+        />
+        Charmander
+      </li>
+    </ul>
+  </div>
 </DocumentFragment>
 `;

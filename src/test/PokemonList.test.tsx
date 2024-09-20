@@ -24,7 +24,7 @@ vi.mock(import("@tanstack/react-query"), async (importOriginal) => {
 });
 
 describe("PokemonList - Snapshot test", () => {
-    const changeSelectedPokemonId = vi.fn();
+    const mockChangeSelectedPokemonId = vi.fn();
 
     it("matches snapshot", () => {
         (useInfiniteQuery as Mock).mockReturnValue({
@@ -36,7 +36,7 @@ describe("PokemonList - Snapshot test", () => {
 
         (useAppContext as Mock).mockReturnValue({
             selectedPokemonId: 1,
-            changeSelectedPokemonId,
+            changeSelectedPokemonId: mockChangeSelectedPokemonId,
             sortingOrder: "asc",
             filters: {},
             favorites: [],
@@ -52,12 +52,12 @@ describe("PokemonList - Snapshot test", () => {
 });
 
 describe("PokemonList - General tests", () => {
-    const changeSelectedPokemonId = vi.fn();
+    const mockChangeSelectedPokemonId = vi.fn();
 
     beforeEach(() => {
         (useAppContext as Mock).mockReturnValue({
             selectedPokemonId: 1,
-            changeSelectedPokemonId,
+            changeSelectedPokemonId: mockChangeSelectedPokemonId,
             sortingOrder: "asc",
             filters: {},
             favorites: [],
@@ -96,7 +96,6 @@ describe("PokemonList - General tests", () => {
             hasNextPage: false,
         });
 
-        // mock the scrollIntoView function as it fails the test and it is not necessary for the test.
         window.HTMLLIElement.prototype.scrollIntoView = vi.fn();
         render(<PokemonList limit={10} />);
 
@@ -132,14 +131,11 @@ describe("PokemonList - General tests", () => {
         userEvent.click(await screen.findByText("Ivysaur"));
 
         await waitFor(() => {
-            expect(changeSelectedPokemonId).toHaveBeenCalledWith(2);
+            expect(mockChangeSelectedPokemonId).toHaveBeenCalledWith(2);
         });
     });
 
     it("should not display the hamburger menu when screen width is greater than 900px", async () => {
-        global.innerWidth = 901;
-        global.dispatchEvent(new Event("resize"));
-
         render(<PokemonList limit={10} />);
         const hamburgerButton = screen.getByLabelText("Toggle Menu");
         expect(hamburgerButton).not.toBeVisible();
@@ -149,11 +145,9 @@ describe("PokemonList - General tests", () => {
         render(<PokemonList limit={10} />);
 
         const hamburgerButton = screen.getByLabelText("Toggle Menu");
-
         expect(hamburgerButton).toHaveClass("hamburger");
 
         fireEvent.click(hamburgerButton);
-
         expect(hamburgerButton).toHaveClass("hamburger active");
     });
 
@@ -163,7 +157,7 @@ describe("PokemonList - General tests", () => {
         );
 
         (useAppContext as Mock).mockReturnValue({
-            changeSelectedPokemonId,
+            changeSelectedPokemonId: mockChangeSelectedPokemonId,
             filters: { type: "grass" },
             currentPokemonList: mockFilteredPokemonList,
             setCurrentPokemonList: vi.fn(),
@@ -177,7 +171,7 @@ describe("PokemonList - General tests", () => {
 
     it("should sort the Pokémon list based on sortingOrder", async () => {
         (useAppContext as Mock).mockReturnValue({
-            changeSelectedPokemonId,
+            changeSelectedPokemonId: mockChangeSelectedPokemonId,
             sortingOrder: "desc",
             filters: {},
             currentPokemonList: mockPokemonData.reverse(),
@@ -206,7 +200,7 @@ describe("PokemonList - General tests", () => {
 
     it("should display only 'Load More' when the list is empty", async () => {
         (useAppContext as Mock).mockReturnValue({
-            changeSelectedPokemonId,
+            changeSelectedPokemonId: mockChangeSelectedPokemonId,
             filters: {},
             currentPokemonList: [],
             setCurrentPokemonList: vi.fn(),
