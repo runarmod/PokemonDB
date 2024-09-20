@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, Mock } from "vitest";
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import PokemonList from "../components/PokemonList";
 import { useInfiniteQuery } from "@tanstack/react-query";
@@ -147,12 +147,13 @@ describe("PokemonList - General tests", () => {
 
     it("should display list when hamburger button clicked", async () => {
         render(<PokemonList limit={10} />);
-
         const hamburgerButton = screen.getByLabelText("Toggle Menu");
         expect(hamburgerButton).toHaveClass("hamburger");
 
-        fireEvent.click(hamburgerButton);
-        expect(hamburgerButton).toHaveClass("hamburger active");
+        userEvent.click(hamburgerButton);
+        await waitFor(() => {
+            expect(hamburgerButton).toHaveClass("hamburger active");
+        });
     });
 
     it("should filter the Pokémon list based on the filters", async () => {
