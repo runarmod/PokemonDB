@@ -1,5 +1,5 @@
 #PokemonCardContainer {
-    height: 50vh;
+    height: 50dvh;
     aspect-ratio: 5/3;
     color: #213547;
     border: 1px solid #213547;
@@ -50,7 +50,7 @@
 }
 
 #StarIcon {
-    height: 5vh;
+    height: 5dvh;
 }
 
 #PokemonImage {
@@ -80,11 +80,11 @@
 }
 
 #StatContainer > section > h1 {
-    font-size: 6vh;
+    font-size: 6dvh;
 }
 
 #StatContainer > section > h2 {
-    font-size: 4vh;
+    font-size: 4dvh;
 }
 
 #StatGrid {
@@ -114,20 +114,20 @@
 }
 
 #StatGrid section h3 {
-    font-size: 3vh;
+    font-size: 3dvh;
 }
 
 #StatGrid section p {
-    font-size: 2vh;
+    font-size: 2dvh;
 }
 
 #StatGrid section ul {
-    font-size: 2vh;
+    font-size: 2dvh;
 }
 
 @media (max-aspect-ratio: 1/1) {
     #PokemonCardContainer {
-        height: 60vh;
+        height: 60dvh;
         aspect-ratio: 3/5;
         flex-direction: column;
     }
@@ -154,11 +154,11 @@
     }
 
     #StatContainer > section > h1 {
-        font-size: 2.8vh;
+        font-size: 2.8dvh;
     }
 
     #StatContainer > section > h2 {
-        font-size: 2vh;
+        font-size: 2dvh;
     }
 
     #StatGrid {
@@ -166,15 +166,15 @@
     }
 
     #StatGrid section h3 {
-        font-size: 1.8vh;
+        font-size: 1.8dvh;
     }
 
     #StatGrid section p {
-        font-size: 1.5vh;
+        font-size: 1.5dvh;
     }
 
     #StatGrid section ul {
-        font-size: 1.5vh;
+        font-size: 1.5dvh;
     }
 }
 

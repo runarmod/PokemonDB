@@ -10,7 +10,7 @@
     background-color: #303030;
     border-radius: 8px;
     box-shadow: 0 15px 30px #101010;
-    max-height: calc(100vh - 2 * 12px);
+    max-height: calc(100dvh - 2 * 12px);
     overflow-y: auto;
     transition: max-height 0.3s ease-out;
 }
@@ -128,7 +128,7 @@
 
     .list.active {
         /* Icon is 30px. There are 3 margins on 12px each */
-        max-height: calc(100vh - 30px - 3 * 12px);
+        max-height: calc(100dvh - 30px - 3 * 12px);
     }
 
     .hamburger {
