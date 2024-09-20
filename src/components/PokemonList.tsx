@@ -80,7 +80,9 @@ const PokemonList = ({ limit }: { limit: number }) => {
         }
 
         // We want this useEffect() to be called every time the 'sortingOrder' or 'filters' change.
-        // We do not want it to be called every time 'data' is changed.
+        // This is because we want to reset the 'currentPokemonList' to correctly reflect the new sorting and filtering.
+        // We also want to have control over which pokemon is selected when the 'currentPokemonList' is updated.
+        // The other dependencies are handled in their own useEffect()s.
         // Because of this we disable the eslint warning on this line.
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -98,11 +100,33 @@ const PokemonList = ({ limit }: { limit: number }) => {
         }
 
         // We want this useEffect() to be called every time the 'data' change.
-        // We do not want it to be called every time 'favorites', 'filters', 'setCurrentPokemonList' or 'sortingOrder'  is changed.
+        // We do not want it to be called every time 'favorites', 'filters', 'setCurrentPokemonList' or 'sortingOrder' is changed.
         // Because of this we disable the eslint warning on this line.
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data]);
+
+    useEffect(() => {
+        if (data !== undefined) {
+            if (!filters.includes("favorite")) {
+                return;
+            }
+
+            const sortedAndFilteredPokemon = filterAndSortPokemon(
+                data.pages.flat(),
+                filters,
+                sortingOrder,
+                favorites
+            );
+            setCurrentPokemonList(sortedAndFilteredPokemon);
+        }
+
+        // This useEffect() should only be called when the 'favorites' change.
+        // And we are only interested in updating the 'currentPokemonList' when the 'favorite' filter is active.
+        // Because of this we disable the eslint warning on this line.
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [favorites]);
 
     useEffect(() => {
         const selectedPokemonElement = pokemonRefs.current[selectedPokemonId];

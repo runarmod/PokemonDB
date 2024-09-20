@@ -11,7 +11,7 @@ const PokemonCardScroller = ({ children }: { children: React.ReactNode }) => {
         const index = currentPokemonList
             .map((pokemon) => pokemon.id)
             .indexOf(selectedPokemonId);
-        if (index === 0) {
+        if (index <= 0) {
             changeSelectedPokemonId(
                 currentPokemonList[currentPokemonList.length - 1].id
             );
