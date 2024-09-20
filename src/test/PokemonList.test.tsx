@@ -5,7 +5,7 @@ import PokemonList from "../components/PokemonList";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import "@testing-library/jest-dom";
 import mockPokemonData from "./mocks/mockPokemonData.json";
-import { useAppContext } from "../utils";
+import { SortingType, useAppContext } from "../utils";
 
 vi.mock(import("../utils"), async (importOriginal) => {
     const actual = await importOriginal();
@@ -37,8 +37,8 @@ describe("PokemonList - Snapshot test", () => {
         (useAppContext as Mock).mockReturnValue({
             selectedPokemonId: 1,
             changeSelectedPokemonId: mockChangeSelectedPokemonId,
-            sortingOrder: "asc",
-            filters: {},
+            sortingOrder: SortingType.NAME_ASC,
+            filters: [],
             favorites: [],
             currentPokemonList: mockPokemonData,
             setCurrentPokemonList: vi.fn(),
@@ -58,8 +58,8 @@ describe("PokemonList - General tests", () => {
         (useAppContext as Mock).mockReturnValue({
             selectedPokemonId: 1,
             changeSelectedPokemonId: mockChangeSelectedPokemonId,
-            sortingOrder: "asc",
-            filters: {},
+            sortingOrder: SortingType.NAME_ASC,
+            filters: [],
             favorites: [],
             currentPokemonList: mockPokemonData,
             setCurrentPokemonList: vi.fn(),
@@ -163,7 +163,7 @@ describe("PokemonList - General tests", () => {
 
         (useAppContext as Mock).mockReturnValue({
             changeSelectedPokemonId: mockChangeSelectedPokemonId,
-            filters: { type: "grass" },
+            filters: ["grass"],
             currentPokemonList: mockFilteredPokemonList,
             setCurrentPokemonList: vi.fn(),
         });
@@ -177,8 +177,8 @@ describe("PokemonList - General tests", () => {
     it("should sort the Pokémon list based on sortingOrder", async () => {
         (useAppContext as Mock).mockReturnValue({
             changeSelectedPokemonId: mockChangeSelectedPokemonId,
-            sortingOrder: "desc",
-            filters: {},
+            sortingOrder: SortingType.NAME_DESC,
+            filters: [],
             currentPokemonList: mockPokemonData.reverse(),
             setCurrentPokemonList: vi.fn(),
         });
@@ -204,7 +204,7 @@ describe("PokemonList - General tests", () => {
     it("should display only 'Load More' when the list is empty", async () => {
         (useAppContext as Mock).mockReturnValue({
             changeSelectedPokemonId: mockChangeSelectedPokemonId,
-            filters: {},
+            filters: [],
             currentPokemonList: [],
             setCurrentPokemonList: vi.fn(),
         });
