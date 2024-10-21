@@ -51,6 +51,7 @@ export const pokemonTypeColors: Map<string, string> = new Map<string, string>([
     ["dark", "#624D4E"],
     ["steel", "#60A1B8"],
     ["fairy", "#EF70EF"],
+    ["rock", "#AFA981"],
 ]);
 
 export function filterAndSortPokemon(

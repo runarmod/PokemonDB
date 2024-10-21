@@ -170,9 +170,10 @@ describe("SortAndFilter - General tests", () => {
             expect(screen.getByLabelText("dark")).toBeInTheDocument();
             expect(screen.getByLabelText("steel")).toBeInTheDocument();
             expect(screen.getByLabelText("fairy")).toBeInTheDocument();
+            expect(screen.getByLabelText("rock")).toBeInTheDocument();
 
             const checkBoxes = screen.getAllByRole("checkbox");
-            expect(checkBoxes).toHaveLength(18);
+            expect(checkBoxes).toHaveLength(19); // 18 types + favorites
 
             const checkedCheckboxes = checkBoxes.filter(
                 (checkBox) => (checkBox as HTMLInputElement).checked
