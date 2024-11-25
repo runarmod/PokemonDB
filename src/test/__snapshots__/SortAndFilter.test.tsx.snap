@@ -420,6 +420,25 @@ exports[`SortAndFilter - General tests > Snapshot test > matches snapshot 1`] = 
             </span>
           </label>
         </li>
+        <li
+          class="filterListEntry"
+        >
+          <input
+            id="checkrock"
+            type="checkbox"
+            value="rock"
+          />
+          <label
+            for="checkrock"
+          >
+            <span
+              class="pokemonTypeLabel"
+              style="background-color: rgb(175, 169, 129);"
+            >
+              rock
+            </span>
+          </label>
+        </li>
       </ul>
     </div>
   </div>
