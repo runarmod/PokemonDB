@@ -54,12 +54,12 @@ const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
         } else {
             newFilters.push(filter);
         }
-        sessionStorage.setItem("filters", JSON.stringify(newFilters));
+        sessionStorage.setItem("pokemonFilters", JSON.stringify(newFilters));
         setFilters(newFilters);
     };
 
     useEffect(() => {
-        const storedFilters = sessionStorage.getItem("filters");
+        const storedFilters = sessionStorage.getItem("pokemonFilters");
         if (storedFilters) {
             setFilters(JSON.parse(storedFilters));
         }
