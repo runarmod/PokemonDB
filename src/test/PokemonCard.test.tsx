@@ -154,10 +154,7 @@ describe("PokemonCard - Favorites test", () => {
         render(<PokemonCard />);
 
         const starIcon = screen.getByAltText("Star image");
-        expect(starIcon).toHaveAttribute(
-            "src",
-            "/project1/src/assets/star.png"
-        );
+        expect(starIcon).toHaveAttribute("src", "/src/assets/star.png");
     });
 
     it("should display empty star when other Pokemons are favorited", () => {
@@ -169,10 +166,7 @@ describe("PokemonCard - Favorites test", () => {
         render(<PokemonCard />);
 
         const starIcon = screen.getByAltText("Star image");
-        expect(starIcon).toHaveAttribute(
-            "src",
-            "/project1/src/assets/star.png"
-        );
+        expect(starIcon).toHaveAttribute("src", "/src/assets/star.png");
     });
 
     it("should display filled star when a Pokemon is favorited", () => {
@@ -186,7 +180,7 @@ describe("PokemonCard - Favorites test", () => {
         const filledStarIcon = screen.getByAltText("Star image");
         expect(filledStarIcon).toHaveAttribute(
             "src",
-            "/project1/src/assets/star_filled.png"
+            "/src/assets/star_filled.png"
         );
     });
 
@@ -201,7 +195,7 @@ describe("PokemonCard - Favorites test", () => {
         const filledStarIcon = screen.getByAltText("Star image");
         expect(filledStarIcon).toHaveAttribute(
             "src",
-            "/project1/src/assets/star_filled.png"
+            "/src/assets/star_filled.png"
         );
     });
 

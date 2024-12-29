@@ -14,7 +14,7 @@ exports[`Snapshot test > matches snapshot 1`] = `
         <img
           alt="Star image"
           id="StarIcon"
-          src="/project1/src/assets/star.png"
+          src="/src/assets/star.png"
         />
       </button>
       <img

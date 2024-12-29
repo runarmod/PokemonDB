@@ -151,7 +151,7 @@ describe("SortAndFilter - General tests", () => {
             expect(filledStarIcon).toBeInTheDocument();
             expect(filledStarIcon).toHaveAttribute(
                 "src",
-                "/project1/src/assets/star_filled.png"
+                "/src/assets/star_filled.png"
             );
             expect(screen.getByLabelText("normal")).toBeInTheDocument();
             expect(screen.getByLabelText("fire")).toBeInTheDocument();

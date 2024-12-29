@@ -11,7 +11,7 @@ exports[`SortAndFilter - General tests > Snapshot test > matches snapshot 1`] = 
     >
       <img
         alt="Sort/filter"
-        src="/project1/src/assets/sort_filter.png"
+        src="/src/assets/sort_filter.png"
       />
     </button>
     <div
@@ -91,7 +91,7 @@ exports[`SortAndFilter - General tests > Snapshot test > matches snapshot 1`] = 
             <img
               alt="favorite icon"
               id="favoriteIcon"
-              src="/project1/src/assets/star_filled.png"
+              src="/src/assets/star_filled.png"
             />
           </label>
         </li>

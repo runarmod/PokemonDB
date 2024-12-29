@@ -8,7 +8,7 @@ exports[`PokemonCardScroller - Snapshot test > matches snapshot 1`] = `
     <button>
       <img
         alt="Up Arrow"
-        src="/project1/src/assets/up_arrow.svg"
+        src="/src/assets/up_arrow.svg"
       />
     </button>
     <div>
@@ -17,7 +17,7 @@ exports[`PokemonCardScroller - Snapshot test > matches snapshot 1`] = `
     <button>
       <img
         alt="Down Arrow"
-        src="/project1/src/assets/down_arrow.svg"
+        src="/src/assets/down_arrow.svg"
       />
     </button>
   </div>

@@ -7,8 +7,8 @@ DIST_FOLDER=~/T26-Project-1/dist
 
 if [ -d "$DIST_FOLDER" ]; then
     echo "Dist folder exists, proceeding with the reload."
-    sudo rm -r /var/www/html/project1
-    sudo mv "$DIST_FOLDER" /var/www/html/project1
+    sudo rm -r /var/www/html
+    sudo mv "$DIST_FOLDER" /var/www/html
     echo "Project has been successfully updated."
 else
     echo "Error: The dist folder does not exist at $DIST_FOLDER. Please build the project first."
