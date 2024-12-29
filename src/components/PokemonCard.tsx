@@ -1,9 +1,9 @@
-import "../styles/PokemonCard.css";
-import { Requests } from "../api/Requests";
-import { PokeAPI } from "pokeapi-types";
 import { useQuery } from "@tanstack/react-query";
+import { PokeAPI } from "pokeapi-types";
+import { Requests } from "../api/Requests";
 import Star from "../assets/star.png";
 import FilledStar from "../assets/star_filled.png";
+import "../styles/PokemonCard.css";
 import { capitalizeFirstLetter, useAppContext } from "../utils";
 import PokemonTypeLabel from "./PokemonTypeLabel";
 

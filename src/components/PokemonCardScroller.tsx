@@ -1,7 +1,7 @@
-import { useAppContext } from "../utils";
-import UpArrow from "../assets/up_arrow.svg";
 import DownArrow from "../assets/down_arrow.svg";
+import UpArrow from "../assets/up_arrow.svg";
 import "../styles/PokemonCardScroller.css";
+import { useAppContext } from "../utils";
 
 const PokemonCardScroller = ({ children }: { children: React.ReactNode }) => {
     const { selectedPokemonId, changeSelectedPokemonId, currentPokemonList } =

@@ -1,10 +1,10 @@
-import { pokemonTypeColors, SortingType, useAppContext } from "../utils";
-import PokemonTypeLabel from "./PokemonTypeLabel";
-import Star from "../assets/star_filled.png";
+import { useState } from "react";
 import SortFilter from "../assets/sort_filter.png";
+import Star from "../assets/star_filled.png";
 import X from "../assets/X.png";
 import "../styles/SortAndFilter.css";
-import { useState } from "react";
+import { pokemonTypeColors, SortingType, useAppContext } from "../utils";
+import PokemonTypeLabel from "./PokemonTypeLabel";
 
 export default function SortAndFilter() {
     const { sortingOrder, changeSortingOrder, updateFilters, filters } =

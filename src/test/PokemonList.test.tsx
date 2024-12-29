@@ -1,11 +1,11 @@
-import { describe, it, expect, vi, Mock } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import PokemonList from "../components/PokemonList";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import "@testing-library/jest-dom";
-import mockPokemonData from "./mocks/mockPokemonData.json";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it, Mock, vi } from "vitest";
+import PokemonList from "../components/PokemonList";
 import { SortingType, useAppContext } from "../utils";
+import mockPokemonData from "./mocks/mockPokemonData.json";
 
 vi.mock(import("../utils"), async (importOriginal) => {
     const actual = await importOriginal();

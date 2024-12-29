@@ -1,9 +1,9 @@
-import { describe, it, expect, vi, Mock } from "vitest";
+import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { SortingType, useAppContext } from "../utils";
-import "@testing-library/jest-dom";
+import { describe, expect, it, Mock, vi } from "vitest";
 import SortAndFilter from "../components/SortAndFilter";
+import { SortingType, useAppContext } from "../utils";
 
 vi.mock(import("../utils"), async (importOriginal) => {
     const actual = await importOriginal();

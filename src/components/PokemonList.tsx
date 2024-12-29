@@ -2,8 +2,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { PokeAPI } from "pokeapi-types";
 import { useEffect, useRef, useState } from "react";
 import { Requests } from "../api/Requests";
-import "../styles/PokemonList.css";
 import RefreshIcon from "../assets/refresh.png";
+import "../styles/PokemonList.css";
 import {
     capitalizeFirstLetter,
     filterAndSortPokemon,

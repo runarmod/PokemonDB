@@ -1,10 +1,10 @@
-import { describe, it, expect, vi, Mock } from "vitest";
+import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useAppContext } from "../utils";
-import "@testing-library/jest-dom";
-import mockPokemonData from "./mocks/mockPokemonData.json";
+import { describe, expect, it, Mock, vi } from "vitest";
 import PokemonCardScroller from "../components/PokemonCardScroller";
+import { useAppContext } from "../utils";
+import mockPokemonData from "./mocks/mockPokemonData.json";
 
 vi.mock(import("../utils"), async (importOriginal) => {
     const actual = await importOriginal();

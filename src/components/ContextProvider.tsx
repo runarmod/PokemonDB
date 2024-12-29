@@ -1,6 +1,6 @@
+import { PokeAPI } from "pokeapi-types";
 import React, { ReactNode, createContext, useEffect, useState } from "react";
 import { SortingType } from "../utils";
-import { PokeAPI } from "pokeapi-types";
 
 interface AppContextType {
     selectedPokemonId: number;

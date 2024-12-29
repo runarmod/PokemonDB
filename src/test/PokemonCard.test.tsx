@@ -1,10 +1,10 @@
-import { describe, it, expect, vi, Mock } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
-import PokemonCard from "../components/PokemonCard";
-import { useAppContext } from "../utils";
 import { useQuery } from "@tanstack/react-query";
 import "@testing-library/jest-dom";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { describe, expect, it, Mock, vi } from "vitest";
+import PokemonCard from "../components/PokemonCard";
+import { useAppContext } from "../utils";
 import mockPokemonData from "./mocks/mockPokemonData.json";
 
 vi.mock(import("../utils"), async (importOriginal) => {
