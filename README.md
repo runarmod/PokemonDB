@@ -1,8 +1,6 @@
 # Documentation project 1 - Group 26
 
-Website: <http://it2810-26.idi.ntnu.no/project1/>
-
-Repository: <https://git.ntnu.no/IT2810-H24/T26-Project-1>
+Website: <https://pokemondb.runarmod.no/>
 
 ## Usage
 
